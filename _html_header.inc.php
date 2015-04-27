@@ -102,24 +102,6 @@ echo $params['html_tag'];
 	<!-- PT Sans font family -->
 	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 	
-	<link rel="stylesheet/less" type="text/css" href="style.less" />
-	<script src="less.js" type="text/javascript"></script>
-	<!-- set options before less.js script -->
-	<script>
-	  less = {
-		env: "development",
-		async: false,
-		fileAsync: false,
-		poll: 1000,
-		functions: {},
-		dumpLineNumbers: "comments",
-		relativeUrls: false,
-		rootpath: ":/a.com/"
-	  };
-	</script>
-	<script src="less.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.0/less.min.js"></script>
-	
 	<!-- RESPONSIVE NAVIGATION SCRIPT -->
 	<script>
 		$(document).ready(function(){
