@@ -119,13 +119,13 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 	<?php
 		// List all tags attached to this post:
 		$Item->tags( array(
-				'before'    => '<div class="small">'.T_('Tags').': ',
+				'before'    => '<div class="post-tags">'.T_('<i class="fa fa-tags"></i>').'',
 				'after'     => '</div>',
-				'separator' => ', ',
+				'separator' => '',
 			) );
 	?>
 
-	<div class="small">
+	<div class="comments-count">
 		<?php
 			// Link to comments, trackbacks, etc.:
 			$Item->feedback_link( array(

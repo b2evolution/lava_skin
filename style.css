@@ -41,6 +41,10 @@
   border: 1px solid rgba(0, 0, 0, 0.08);
   padding: 15px;
 }
+.widget_core_user_register h3 {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
 .widget_core_user_register #register_form .form-group {
   margin: 0;
 }
@@ -263,7 +267,11 @@ form.bComment input[type=file] {
   margin-bottom: 0;
 }
 .bPost {
+  margin-top: 25px;
   margin-bottom: 2em;
+  padding: 15px 60px 40px;
+  background-color: rgba(0, 0, 0, 0.024);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 .bPost .bTitle {
   margin: 0;
@@ -271,6 +279,60 @@ form.bComment input[type=file] {
 .bPost .small.text-muted {
   margin: 4px 0 10px;
   font-style: oblique;
+}
+.bPost .content_full .bText {
+  word-spacing: 1px;
+}
+.bPost .content_full .bText .bMore {
+  margin-top: 30px;
+}
+.bPost .content_full .bText .bMore a {
+  padding: 9px 30px;
+  background-color: #333;
+  color: white;
+  border: 2px solid #333;
+  font-weight: normal;
+  transition: 0.3s ease;
+  -webkit-transition: 0.15s ease-out;
+  -moz-transition: 0.15s ease-out;
+  -o-transition: 0.15s ease-out;
+}
+.bPost .content_full .bText .bMore a:hover {
+  color: #f86d18;
+  text-decoration: none;
+  background-color: white;
+  border: 2px solid #f86d18;
+}
+.bPost .post-tags {
+  margin-top: 30px;
+}
+.bPost .post-tags i.fa-tags {
+  vertical-align: middle;
+  margin-right: 5px;
+  font-size: 21px;
+}
+.bPost .post-tags a {
+  font-size: 16px !important;
+  color: white;
+  background-color: #f86d18;
+  padding: 5px;
+  margin-right: 5px;
+  transition: 0.3s ease;
+  -webkit-transition: 0.15s ease-out;
+  -moz-transition: 0.15s ease-out;
+  -o-transition: 0.15s ease-out;
+}
+.bPost .post-tags a:hover {
+  background-color: #c65713 !important;
+  text-decoration: none;
+  color: white;
+}
+.bPost .comments-count {
+  margin-top: 15px;
+}
+.bPost .comments-count a {
+  font-size: 16px;
+  text-transform: uppercase;
 }
 form#user_checkchanges.bComment {
   border: none;
@@ -304,6 +366,16 @@ div.bSideItem h4 {
   width: 100%;
   text-align: center;
 }
+.skin-form .control-buttons a.btn-primary,
+.skin-form div.input a.btn-primary {
+  color: white;
+  font-size: 21.6px;
+}
+.skin-form .control-buttons a.btn-primary:hover,
+.skin-form div.input a.btn-primary:hover {
+  text-decoration: none;
+  color: #337ab7;
+}
 .wrap-form-login,
 .wrap-form-lostpass,
 .wrap-form-register,
@@ -332,6 +404,27 @@ div.bSideItem h4 {
 }
 .wrap-form-login {
   max-width: 400px;
+}
+.wrap-form-login .panel {
+  margin: 5px 0;
+  border-radius: 0px;
+}
+.wrap-form-login .panel .panel-heading {
+  border-radius: 0px;
+}
+.wrap-form-login .panel .panel-body {
+  padding: 20px 40px 10px;
+}
+.wrap-form-login .panel .panel-body .controls .input_text {
+  border-radius: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: none;
+  color: #646464;
+  font-size: 16px;
+}
+.wrap-form-login .panel .panel-body .controls .input_text:focus {
+  outline: none;
+  box-shadow: none;
 }
 .wrap-form-lostpass {
   max-width: 480px;
@@ -505,7 +598,7 @@ body .widget_core_coll_title h1 {
 }
 .navi {
   margin: 0px;
-  background-color: #222;
+  background-color: #333;
 }
 .navi ul.blog-navigation {
   margin: 0px;
@@ -518,7 +611,7 @@ body .widget_core_coll_title h1 {
 .navi ul.blog-navigation li a {
   padding: 15px 15px;
   color: white;
-  border-right: 1px solid rgba(255, 255, 255, 0.18);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   text-decoration: none !important;
   transition: 0.3s ease;
   -webkit-transition: 0.15s ease-out;
@@ -578,7 +671,7 @@ body .widget_core_coll_title h1 {
   }
   #nav-trigger {
     display: block;
-    background-color: #222;
+    background-color: #333;
     padding: 14px 0px;
     text-align: center;
   }
@@ -588,19 +681,26 @@ body .widget_core_coll_title h1 {
     padding: 15px 50px 16px 50px;
     cursor: pointer;
     border-right: 1px solid #f86d18;
+    transition: 0.3s ease;
+    -webkit-transition: 0.15s ease-out;
+    -moz-transition: 0.15s ease-out;
+    -o-transition: 0.15s ease-out;
   }
   #nav-trigger span:after {
     font-family: FontAwesome;
     content: " \f0c9";
   }
+  #nav-trigger span:hover {
+    background-color: #c65713;
+  }
   nav#nav-mobile {
     display: block;
     margin: 0 auto;
     max-width: 400px !important;
-    background-color: #222;
+    background-color: #333;
   }
   nav#nav-mobile ul {
-    border-top: 1px solid #222;
+    border-top: 1px solid #333;
     padding: 0px;
     margin: 0px;
     text-align: center;
@@ -789,6 +889,27 @@ body .widget_core_coll_title h1 {
   padding-left: 0px;
   padding-right: 0px;
 }
+.col-md-3 .panel.widget_core_coll_comment_list .panel-body ul li span.login {
+  color: #f86d18;
+  font-weight: normal;
+}
+.col-md-3 .widget_core_coll_tag_cloud .panel-body .tag_cloud {
+  line-height: 2.0em;
+}
+.col-md-3 .widget_core_coll_tag_cloud .panel-body .tag_cloud a {
+  font-size: 16px !important;
+  color: white;
+  background-color: #f86d18;
+  padding: 5px;
+  transition: 0.3s ease;
+  -webkit-transition: 0.15s ease-out;
+  -moz-transition: 0.15s ease-out;
+  -o-transition: 0.15s ease-out;
+}
+.col-md-3 .widget_core_coll_tag_cloud .panel-body .tag_cloud a:hover {
+  background-color: #c65713 !important;
+  text-decoration: none;
+}
 .PageTop {
   margin-top: 50px;
 }
@@ -908,5 +1029,18 @@ body .widget_core_coll_title h1 {
     border: 1px solid #f86d18;
     padding: 10px;
     margin: 35px auto 0px auto;
+  }
+  .bPost {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .bPost .content_full .bText {
+    word-spacing: 0px;
+  }
+}
+@media only screen and (max-width: 750px) {
+  .bPost {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
