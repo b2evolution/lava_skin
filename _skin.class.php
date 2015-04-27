@@ -15,7 +15,7 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
  *
  * ATTENTION: if you make a new skin you have to change the class name below accordingly
  */
-class black_beauty_Skin extends Skin
+class blackorange_Skin extends Skin
 {
   /**
 	 * Get default name for the skin.
@@ -23,7 +23,7 @@ class black_beauty_Skin extends Skin
 	 */
 	function get_default_name()
 	{
-		return 'Black Beauty Blog';
+		return 'Blackorange Blog';
 	}
 
 
