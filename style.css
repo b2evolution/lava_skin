@@ -1024,6 +1024,7 @@ div.log_container {
     display: none;
   }
 }
+<<<<<<< HEAD
 @media only screen and (max-width: 750px) {
   .evo_post {
     padding-left: 30px;
@@ -1032,6 +1033,171 @@ div.log_container {
   .evo_post .evo_post__full_text {
     word-spacing: 0px;
   }
+=======
+.col-md-9 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.col-md-9 .jumbotron {
+  border-radius: 0px;
+  background-color: rgba(0, 0, 0, 0.025);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #646464;
+  width: 100%;
+}
+.col-md-9 .jumbotron .evo_post_title h2 {
+  padding-top: 0px;
+}
+.col-md-9 .jumbotron .evo_post_title h2 a {
+  color: #f86d18;
+}
+.col-md-9 .jumbotron .evo_post_title h2 a:hover {
+  color: #f86d18;
+}
+.col-md-9 h3 {
+  font-size: 21px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 20px 0px;
+}
+.col-md-9 .img-responsive {
+  width: 100%;
+  border-radius: 0px;
+  padding: 1px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.col-md-9 .widget {
+  margin-bottom: 30px;
+}
+.col-md-9 .widget_core_coll_post_list ul {
+  margin: 0px;
+}
+.col-md-9 .widget_core_coll_post_list ul li {
+  list-style-type: decimal;
+  display: inline-block;
+  max-width: 400px !important;
+}
+.col-md-9 .widget_core_coll_post_list ul li .item_images {
+  opacity: 1;
+  transition: 0.3s ease;
+  -webkit-transition: 0.15s ease-out;
+  -moz-transition: 0.15s ease-out;
+  -o-transition: 0.15s ease-out;
+}
+.col-md-9 .widget_core_coll_post_list ul li .item_images:hover {
+  opacity: 0.1 !important;
+}
+.widget_core_coll_post_list ul {
+  padding-top: 5px;
+  padding-left: 35px;
+}
+.widget_core_coll_post_list ul li div.item_title {
+  position: absolute;
+  z-index: -1;
+  margin-top: 110px;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border: 1px solid #f86d18;
+  padding: 10px;
+  margin-left: 50px;
+}
+.widget_core_coll_post_list ul li div.item_title a.default {
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 0.7px;
+}
+.col-md-3 {
+  padding-top: 12px;
+  padding-bottom: 30px;
+}
+.col-md-3 .panel {
+  border-radius: 0px;
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.025);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 15px;
+  margin-bottom: 30px;
+}
+.col-md-3 .panel .panel-heading {
+  border-radius: 0px;
+  background-color: rgba(0, 0, 0, 0);
+}
+.col-md-3 .panel .panel-heading h4.panel-title {
+  font-size: 17px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.col-md-3 .panel .panel-body ul li {
+  font-size: 15px;
+  list-style-type: decimal;
+  line-height: 1.85em;
+}
+.col-md-3 .panel .panel-body ul li a {
+  font-weight: normal;
+  font-size: 18px;
+}
+.col-md-3 .panel .panel-body ul li a:nth-child(2) {
+  font-weight: bold;
+  letter-spacing: 0.7px;
+}
+.col-md-3 .panel .panel-body ul li .user.anonymous {
+  font-weight: normal;
+}
+.col-md-3 .panel .panel-body img.loadimg {
+  padding: 1px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.col-md-3 .panel.widget_core_coll_comment_list .panel-body {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.col-md-3 .panel.widget_core_coll_comment_list .panel-body ul li span.login {
+  color: #f86d18;
+  font-weight: normal;
+}
+.col-md-3 .widget_core_coll_tag_cloud .panel-body .tag_cloud {
+  line-height: 2.0em;
+}
+.col-md-3 .widget_core_coll_tag_cloud .panel-body .tag_cloud a {
+  font-size: 16px !important;
+  color: white;
+  background-color: #f86d18;
+  padding: 5px;
+  transition: 0.3s ease;
+  -webkit-transition: 0.15s ease-out;
+  -moz-transition: 0.15s ease-out;
+  -o-transition: 0.15s ease-out;
+}
+.col-md-3 .widget_core_coll_tag_cloud .panel-body .tag_cloud a:hover {
+  background-color: #c65713 !important;
+  text-decoration: none;
+}
+.PageTop {
+  margin-top: 50px;
+}
+.PageTop .widget_core_user_links a span {
+  transition: 0.3s ease;
+  -webkit-transition: 0.15s ease-out;
+  -moz-transition: 0.15s ease-out;
+  -o-transition: 0.15s ease-out;
+  color: white;
+  background-color: #f86d18;
+}
+.PageTop .widget_core_user_links a span:hover {
+  text-decoration: none;
+  background-color: white;
+  color: #f86d18;
+}
+.PageTop .widget_core_user_links a:hover {
+  text-decoration: none;
+}
+.PageTop .widget--social-media-links {
+  text-align: right;
+>>>>>>> origin/master
 }
 /* RANDOM FIXES */
 #cboxOverlay {

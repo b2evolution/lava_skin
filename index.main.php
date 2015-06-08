@@ -28,6 +28,7 @@ skin_init( $disp );
 
 // -------------------------- HTML HEADER INCLUDED HERE --------------------------
 skin_include( '_html_header.inc.php', array() );
+<<<<<<< HEAD
 echo "<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>";
 echo '<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">';
 echo '	<!-- RESPONSIVE NAVIGATION SCRIPT -->
@@ -45,6 +46,8 @@ echo '	<!-- RESPONSIVE NAVIGATION SCRIPT -->
 			});
 		});
 	</script>';
+=======
+>>>>>>> origin/master
 // -------------------------------- END OF HEADER --------------------------------
 
 
