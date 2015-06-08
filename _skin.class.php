@@ -6,7 +6,7 @@
  * This file is part of the b2evolution project - {@link http://b2evolution.net/}
  *
  * @package skins
- * @subpackage bootstrap
+ * @subpackage bootstrap_blog
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
 
@@ -15,19 +15,26 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
  *
  * ATTENTION: if you make a new skin you have to change the class name below accordingly
  */
-class blackorange_Skin extends Skin
+class lava_Skin extends Skin
 {
-  /**
+	/**
+	 * Do we want to use style.min.css instead of style.css ?
+	 */
+	var $use_min_css = 'check';  // true|false|'check' Set this to true for better optimization
+	// Note: we leave this on "check" in the bootstrap_blog_skin so it's easier for beginners to just delete the .min.css file
+	// But for best performance, you should set it to true.
+
+	/**
 	 * Get default name for the skin.
 	 * Note: the admin can customize it.
 	 */
 	function get_default_name()
 	{
-		return 'Blackorange Blog';
+		return 'Lava Skin';
 	}
 
 
-  /**
+	/**
 	 * Get default type for the skin.
 	 */
 	function get_default_type()
@@ -37,8 +44,20 @@ class blackorange_Skin extends Skin
 
 
 	/**
-   * Get definitions for editable params
-   *
+	 * What evoSkins API does has this skin been designed with?
+	 *
+	 * This determines where we get the fallback templates from (skins_fallback_v*)
+	 * (allows to use new markup in new b2evolution versions)
+	 */
+	function get_api_version()
+	{
+		return 6;
+	}
+
+
+	/**
+	 * Get definitions for editable params
+	 *
 	 * @see Plugin::GetDefaultSettings()
 	 * @param local params like 'for_editing' => true
 	 */
@@ -56,6 +75,7 @@ class blackorange_Skin extends Skin
 						),
 					'type' => 'select',
 				),
+				// Colorbox
 				'colorbox' => array(
 					'label' => T_('Colorbox Image Zoom'),
 					'note' => T_('Check to enable javascript zooming on images (using the colorbox script)'),
@@ -98,6 +118,7 @@ class blackorange_Skin extends Skin
 					'defaultvalue' => 1,
 					'type' => 'checkbox',
 				),
+				// Other settings
 				'gender_colored' => array(
 					'label' => T_('Display gender'),
 					'note' => T_('Use colored usernames to differentiate men & women.'),
@@ -129,45 +150,21 @@ class blackorange_Skin extends Skin
 	 */
 	function display_init()
 	{
-		global $Messages;
+		global $Messages, $debug;
 
-		require_js( '#jquery#', 'blog' );
-
-		// Initialize font-awesome icons and use them as a priority over the glyphicons, @see get_icon()
-		init_fontawesome_icons( 'fontawesome-glyphicons' );
-
-		require_js( '#bootstrap#', 'blog' );
-		require_css( '#bootstrap_css#', 'blog' );
-		//require_css( '#bootstrap_theme_css#', 'blog' );
-
-		// rsc/less/bootstrap-basic_styles.less
-		// rsc/less/bootstrap-basic.less
-		// rsc/less/bootstrap-blog_base.less
-		// rsc/less/bootstrap-item_base.less
-		// rsc/less/bootstrap-evoskins.less
-		// rsc/build/bootstrap-b2evo_base.bundle.css // CSS concatenation of the above
-		require_css( 'bootstrap-b2evo_base.bmin.css', 'blog' ); // Concatenation + Minifaction of the above
-
-		// Make sure standard CSS is called ahead of custom CSS generated below:
-		require_css( 'style.css', true );
-
-		// Colorbox (a lightweight Lightbox alternative) allows to zoom on images and do slideshows with groups of images:
-		if( $this->get_setting( 'colorbox' ) )
-		{
-			require_js_helper( 'colorbox', 'blog' );
-		}
-
-		// JS to init tooltip (E.g. on comment form for allowed file extensions)
-		add_js_headline( 'jQuery( function () { jQuery( \'[data-toggle="tooltip"]\' ).tooltip() } )' );
-
-		// Set bootstrap classes for messages
-		$Messages->set_params( array(
-				'class_success'  => 'alert alert-dismissible alert-success fade in',
-				'class_warning'  => 'alert alert-dismissible alert-warning fade in',
-				'class_error'    => 'alert alert-dismissible alert-danger fade in',
-				'class_note'     => 'alert alert-dismissible alert-info fade in',
-				'before_message' => '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>',
+		// Request some common features that the parent function (Skin::display_init()) knows how to provide:
+		parent::display_init( array(
+				'jquery', 							// Load jQuery
+				'font_awesome', 					// Load Font Awesome (and use its icons as a priority over the Bootstrap glyphicons)
+				'bootstrap', 						// Load Bootstrap (without 'bootstrap_theme_css')
+				'bootstrap_evo_css', 			// Load the b2evo_base styles for Bootstrap (instead of the old b2evo_base styles)
+				'bootstrap_messages',			// Initialize $Messages Class to use Bootstrap styles
+				'style_css', 						// Load the style.css file of the current skin
+				'colorbox',							// Load Colorbox (a lightweight Lightbox alternative + customizations for b2evo)
+				'bootstrap_init_tooltips', 	// Inline JS to init Bootstrap tooltips (E.g. on comment form for allowed file extensions)
 			) );
+
+		// Skin specific initializations:
 	}
 
 
@@ -190,9 +187,13 @@ class blackorange_Skin extends Skin
 							.'</ul></div>',
 						'header_text_single' => '',
 					'header_end' => '',
-					'head_title' => '<div class="panel-heading">$title$<span class="pull-right">$global_icons$</span></div>'."\n",
-					'filters_start' => '<div class="filters panel-body form-inline">',
-					'filters_end' => '</div>',
+					'head_title' => '<div class="panel-heading fieldset_title"><span class="pull-right">$global_icons$</span><h3 class="panel-title">$title$</h3></div>'."\n",
+					'global_icons_class' => 'btn btn-default btn-sm',
+					'filters_start'        => '<div class="filters panel-body">',
+					'filters_end'          => '</div>',
+					'filter_button_class'  => 'btn-sm btn-info',
+					'filter_button_before' => '<div class="form-group pull-right">',
+					'filter_button_after'  => '</div>',
 					'messages_start' => '<div class="messages form-inline">',
 					'messages_end' => '</div>',
 					'messages_separator' => '<br />',
@@ -402,6 +403,51 @@ class blackorange_Skin extends Skin
 					'fieldend_radio'         => '',
 					'inputstart_radio'       => '<div class="controls">',
 					'inputend_radio'         => "</div>\n",
+					'inputclass_radio'       => '',
+					'radio_label_format'     => '$radio_option_label$',
+					'radio_newline_start'    => '<div class="radio"><label>',
+					'radio_newline_end'      => "</label></div>\n",
+					'radio_oneline_start'    => '<label class="radio-inline">',
+					'radio_oneline_end'      => "</label>\n",
+				);
+
+			case 'fixed_form':
+				// Form with fixed label width:
+				return array(
+					'layout'         => 'fieldset',
+					'formclass'      => 'form-horizontal',
+					'formstart'      => '',
+					'formend'        => '',
+					'title_fmt'      => '<span style="float:right">$global_icons$</span><h2>$title$</h2>'."\n",
+					'no_title_fmt'   => '<span style="float:right">$global_icons$</span>'."\n",
+					'fieldset_begin' => '<div class="fieldset_wrapper $class$" id="fieldset_wrapper_$id$"><fieldset $fieldset_attribs$><div class="panel panel-default">'."\n"
+															.'<legend class="panel-heading" $title_attribs$>$fieldset_title$</legend><div class="panel-body $class$">'."\n",
+					'fieldset_end'   => '</div></div></fieldset></div>'."\n",
+					'fieldstart'     => '<div class="form-group fixedform-group" $ID$>'."\n",
+					'fieldend'       => "</div>\n\n",
+					'labelclass'     => 'control-label fixedform-label',
+					'labelstart'     => '',
+					'labelend'       => "\n",
+					'labelempty'     => '<label class="control-label fixedform-label"></label>',
+					'inputstart'     => '<div class="controls fixedform-controls">',
+					'inputend'       => "</div>\n",
+					'infostart'      => '<div class="controls fixedform-controls"><div class="form-control-static">',
+					'infoend'        => "</div></div>\n",
+					'buttonsstart'   => '<div class="form-group"><div class="control-buttons fixedform-controls">',
+					'buttonsend'     => "</div></div>\n\n",
+					'customstart'    => '<div class="custom_content">',
+					'customend'      => "</div>\n",
+					'note_format'    => ' <span class="help-inline">%s</span>',
+					// Additional params depending on field type:
+					// - checkbox
+					'inputclass_checkbox'    => '',
+					'inputstart_checkbox'    => '<div class="controls fixedform-controls"><div class="checkbox"><label>',
+					'inputend_checkbox'      => "</label></div></div>\n",
+					'checkbox_newline_start' => '<div class="checkbox">',
+					'checkbox_newline_end'   => "</div>\n",
+					// - radio
+					'fieldstart_radio'       => '<div class="form-group radio-group" $ID$>'."\n",
+					'fieldend_radio'         => "</div>\n\n",
 					'inputclass_radio'       => '',
 					'radio_label_format'     => '$radio_option_label$',
 					'radio_newline_start'    => '<div class="radio"><label>',
