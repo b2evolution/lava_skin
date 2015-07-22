@@ -75,7 +75,7 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 
 		// We want to display the post time:
 		$Item->issue_time( array(
-				'before'      => ' '.T_('posted on '),
+				'before'      => ' '.T_('posted on').' ',
 				'after'       => ' ',
 				'time_format' => 'M j, Y',
 			) );
