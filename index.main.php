@@ -28,7 +28,6 @@ skin_init( $disp );
 
 // -------------------------- HTML HEADER INCLUDED HERE --------------------------
 skin_include( '_html_header.inc.php', array() );
-<<<<<<< HEAD
 echo "<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>";
 echo '<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">';
 echo '	<!-- RESPONSIVE NAVIGATION SCRIPT -->
@@ -46,8 +45,6 @@ echo '	<!-- RESPONSIVE NAVIGATION SCRIPT -->
 			});
 		});
 	</script>';
-=======
->>>>>>> origin/master
 // -------------------------------- END OF HEADER --------------------------------
 
 
@@ -152,8 +149,8 @@ siteskin_include( '_site_body_header.inc.php' );
 <!-- ============================== END OF NAVIGATION ============================== -->
 
 <div class="row">
-	<div class="<?php echo ( $Skin->get_setting( 'layout' ) == 'single_column' ? 'col-md-12' : 'col-md-9' ); 
-			echo ( $Skin->get_setting( 'layout' ) == 'left_sidebar' ? ' pull-right' : '' ); ?>">
+
+	<div class="<?php echo $Skin->get_column_class(); ?>">
 
 		<main><!-- This is were a link like "Jump to main content" would land -->
 
@@ -207,17 +204,15 @@ siteskin_include( '_site_body_header.inc.php' );
 
 		<?php
 		// Go Grab the featured post:
-		if( $Item = & get_featured_Item() )
+		if( ! in_array( $disp, array( 'single', 'page' ) ) && $Item = & get_featured_Item() )
 		{ // We have a featured/intro post to display:
 			// ---------------------- ITEM BLOCK INCLUDED HERE ------------------------
-			echo '<div class="panel panel-default"><div class="panel-body">';
 			skin_include( '_item_block.inc.php', array(
 					'feature_block' => true,
 					'content_mode' => 'full', // We want regular "full" content, even in category browsing: i-e no excerpt or thumbnail
 					'intro_mode'   => 'normal',	// Intro posts will be displayed in normal mode
-					'item_class'   => 'featured_post',
+					'item_class'   => ($Item->is_intro() ? 'well evo_intro_post' : 'well evo_featured_post'),
 				) );
-			echo '</div></div>';
 			// ----------------------------END ITEM BLOCK  ----------------------------
 		}
 		?>
@@ -261,8 +256,8 @@ siteskin_include( '_site_body_header.inc.php' );
 					'page_current_template' => '<span><b>$page_num$</b></span>',
 					'page_item_before' => '<li>',
 					'page_item_after' => '</li>',
-					'prev_text' => '&lt;&lt;',
-					'next_text' => '&gt;&gt;',
+					'prev_text' => '<i class="fa fa-angle-double-left"></i>',
+					'next_text' => '<i class="fa fa-angle-double-right"></i>',
 				) );
 			// ------------------------- END OF PREV/NEXT PAGE LINKS -------------------------
 		}
@@ -271,10 +266,6 @@ siteskin_include( '_site_body_header.inc.php' );
 		<?php
 			// -------------- MAIN CONTENT TEMPLATE INCLUDED HERE (Based on $disp) --------------
 			skin_include( '$disp$', array(
-					'disp_posts'  => '',		// We already handled this case above
-					'disp_single' => '',		// We already handled this case above
-					'disp_page'   => '',		// We already handled this case above
-					'disp_front'  => '_front.disp.php',
 					'author_link_text' => 'preferredname',
 					// Profile tabs to switch between user edit forms
 					'profile_tabs' => array(
@@ -292,8 +283,8 @@ siteskin_include( '_site_body_header.inc.php' );
 						'page_current_template' => '<span><b>$page_num$</b></span>',
 						'page_item_before'      => '<li>',
 						'page_item_after'       => '</li>',
-						'prev_text'             => '&lt;&lt;',
-						'next_text'             => '&gt;&gt;',
+						'prev_text'             => '<i class="fa fa-angle-double-left"></i>',
+						'next_text'             => '<i class="fa fa-angle-double-right"></i>',
 					),
 					// Form params for the forms below: login, register, lostpassword, activateinfo and msgform
 					'skin_form_before'      => '<div class="panel panel-default skin-form">'
@@ -333,7 +324,7 @@ siteskin_include( '_site_body_header.inc.php' );
 					'search_submit_before' => '<span class="input-group-btn">',
 					'search_submit_after'  => '</span></div>',
 					// Front page
-					'featured_intro_before' => '<div class="jumbotron">',
+					'featured_intro_before' => '<div class="jumbotron"><div class="intro_background_image"></div>',
 					'featured_intro_after'  => '</div>',
 					// Form "Sending a message"
 					'msgform_form_title' => T_('Sending a message'),
@@ -348,8 +339,8 @@ siteskin_include( '_site_body_header.inc.php' );
 
 
 	<?php
-	if( $Skin->get_setting( 'layout' ) != 'single_column' )
-	{
+	if( $Skin->is_visible_sidebar() )
+	{ // Display sidebar:
 	?>
 	<aside class="col-md-3<?php echo ( $Skin->get_setting( 'layout' ) == 'left_sidebar' ? ' pull-left' : '' ); ?>">
 		<!-- =================================== START OF SIDEBAR =================================== -->
@@ -433,9 +424,7 @@ siteskin_include( '_site_body_header.inc.php' );
 
 </div><!-- .row -->
 
-
 <footer class="row">
-
 	<!-- =================================== START OF FOOTER =================================== -->
 	<div class="col-md-12 center">
 
@@ -496,17 +485,16 @@ siteskin_include( '_site_body_header.inc.php' );
 					'block_start' => '<div class="powered_by">',
 					'block_end'   => '</div>',
 					// Check /rsc/img/ for other possible images -- Don't forget to change or remove width & height too
-					'img_url'     => '$rsc$img/b2evolution-logo-Cantarell.svg',
-					'img_width'   => 150,
+					'img_url'     => '$rsc$img/powered-by-b2evolution-120t.gif',
+					'img_width'   => 120,
+					'img_height'  => 32,
 				) );
 		?>
-	</div><!-- .col -->
-	
+		
+	</div><!-- .col -->	
 </footer><!-- .row -->
 
-
 </div><!-- .container -->
-
 
 <?php
 // ---------------------------- SITE FOOTER INCLUDED HERE ----------------------------
