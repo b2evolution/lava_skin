@@ -1,6 +1,6 @@
 <?php
 /**
- * This is the main/default page template for the "bootstrap_blog" skin.
+ * This is the main/default page template for the "lava" skin.
  *
  * This skin only uses one single template which includes most of its features.
  * It will also rely on default includes for specific dispays (like the comment form).
@@ -12,7 +12,6 @@
  * to handle the request (based on $disp).
  *
  * @package evoskins
- * @subpackage bootstrap_blog
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
 
@@ -29,7 +28,6 @@ skin_init( $disp );
 // -------------------------- HTML HEADER INCLUDED HERE --------------------------
 skin_include( '_html_header.inc.php', array() );
 echo "<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>";
-echo '<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">';
 echo '	<!-- RESPONSIVE NAVIGATION SCRIPT -->
 	<script>
 		$(document).ready(function(){
@@ -150,7 +148,7 @@ siteskin_include( '_site_body_header.inc.php' );
 
 <div class="row">
 
-	<div class="<?php echo $Skin->get_column_class(); ?>">
+	<div class="col-md-9">
 
 		<main><!-- This is were a link like "Jump to main content" would land -->
 
@@ -220,15 +218,6 @@ siteskin_include( '_site_body_header.inc.php' );
 		<?php
 		if( $disp != 'front' && $disp != 'download' && $disp != 'search' )
 		{
-			// -------------------- PREV/NEXT PAGE LINKS (POST LIST MODE) --------------------
-			mainlist_page_links( array(
-					'block_start' => '<div class="center"><ul class="site_pagination">',
-					'block_end' => '</ul></div>',
-					'page_current_template' => '<span><b>$page_num$</b></span>',
-					'page_item_before' => '<li>',
-					'page_item_after' => '</li>',
-				) );
-			// ------------------------- END OF PREV/NEXT PAGE LINKS -------------------------
 		?>
 
 		<?php
@@ -278,13 +267,13 @@ siteskin_include( '_site_body_header.inc.php' );
 					),
 					// Pagination
 					'pagination' => array(
-						'block_start'           => '<div class="center"><ul class="pagination">',
-						'block_end'             => '</ul></div>',
+						'block_start' => '<div class="center"><ul class="site_pagination">',
+						'block_end' => '</ul></div>',
 						'page_current_template' => '<span><b>$page_num$</b></span>',
-						'page_item_before'      => '<li>',
-						'page_item_after'       => '</li>',
-						'prev_text'             => '<i class="fa fa-angle-double-left"></i>',
-						'next_text'             => '<i class="fa fa-angle-double-right"></i>',
+						'page_item_before' => '<li>',
+						'page_item_after' => '</li>',
+						'prev_text' => '<i class="fa fa-angle-double-left"></i>',
+						'next_text' => '<i class="fa fa-angle-double-right"></i>',
 					),
 					// Form params for the forms below: login, register, lostpassword, activateinfo and msgform
 					'skin_form_before'      => '<div class="panel panel-default skin-form">'
@@ -337,12 +326,7 @@ siteskin_include( '_site_body_header.inc.php' );
 
 	</div><!-- .col -->
 
-
-	<?php
-	if( $Skin->is_visible_sidebar() )
-	{ // Display sidebar:
-	?>
-	<aside class="col-md-3<?php echo ( $Skin->get_setting( 'layout' ) == 'left_sidebar' ? ' pull-left' : '' ); ?>">
+	<aside class="col-md-3">
 		<!-- =================================== START OF SIDEBAR =================================== -->
 		<div class="evo_container evo_container__sidebar">
 		<?php
@@ -420,8 +404,6 @@ siteskin_include( '_site_body_header.inc.php' );
 		?>
 		</div>
 	</aside><!-- .col -->
-	<?php } ?>
-
 </div><!-- .row -->
 
 <footer class="row">
