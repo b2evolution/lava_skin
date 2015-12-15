@@ -171,12 +171,6 @@ class lava_Skin extends Skin
 						'defaultvalue' => '#333',
 						'type' => 'color',
 					),
-					'fs_but_hov_col' => array(
-						'label' => T_('Full story button hover color'),
-						'note' => T_(''),
-						'defaultvalue' => '#f86d18',
-						'type' => 'color',
-					),
 				'full_story_button_end' => array(
 					'layout' => 'end_fieldset',
 				),
@@ -280,68 +274,75 @@ class lava_Skin extends Skin
 					'layout' => 'end_fieldset',
 				),
 				
-				
-				// Colorbox
-				'colorbox' => array(
-					'label' => T_('Colorbox Image Zoom'),
-					'note' => T_('Check to enable javascript zooming on images (using the colorbox script)'),
-					'defaultvalue' => 1,
-					'type' => 'checkbox',
-				),
-				'colorbox_vote_post' => array(
-					'label' => T_('Voting on Post Images'),
-					'note' => T_('Check this to enable AJAX voting buttons in the colorbox zoom view'),
-					'defaultvalue' => 1,
-					'type' => 'checkbox',
-				),
-				'colorbox_vote_post_numbers' => array(
-					'label' => T_('Display Votes'),
-					'note' => T_('Check to display number of likes and dislikes'),
-					'defaultvalue' => 1,
-					'type' => 'checkbox',
-				),
-				'colorbox_vote_comment' => array(
-					'label' => T_('Voting on Comment Images'),
-					'note' => T_('Check this to enable AJAX voting buttons in the colorbox zoom view'),
-					'defaultvalue' => 1,
-					'type' => 'checkbox',
-				),
-				'colorbox_vote_comment_numbers' => array(
-					'label' => T_('Display Votes'),
-					'note' => T_('Check to display number of likes and dislikes'),
-					'defaultvalue' => 1,
-					'type' => 'checkbox',
-				),
-				'colorbox_vote_user' => array(
-					'label' => T_('Voting on User Images'),
-					'note' => T_('Check this to enable AJAX voting buttons in the colorbox zoom view'),
-					'defaultvalue' => 1,
-					'type' => 'checkbox',
-				),
-				'colorbox_vote_user_numbers' => array(
-					'label' => T_('Display Votes'),
-					'note' => T_('Check to display number of likes and dislikes'),
-					'defaultvalue' => 1,
-					'type' => 'checkbox',
-				),
-				// Other settings
-				'gender_colored' => array(
-					'label' => T_('Display gender'),
-					'note' => T_('Use colored usernames to differentiate men & women.'),
-					'defaultvalue' => 0,
-					'type' => 'checkbox',
-				),
-				'bubbletip' => array(
-					'label' => T_('Username bubble tips'),
-					'note' => T_('Check to enable bubble tips on usernames'),
-					'defaultvalue' => 0,
-					'type' => 'checkbox',
-				),
-				'autocomplete_usernames' => array(
-					'label' => T_('Autocomplete usernames'),
-					'note' => T_('Check to enable auto-completion of usernames entered after a "@" sign in the comment forms'),
-					'defaultvalue' => 1,
-					'type' => 'checkbox',
+
+				'other_stgs_start' => array(
+					'layout' => 'begin_fieldset',
+					'label'  => T_('Other settings')
+				),				
+					// Colorbox
+					'colorbox' => array(
+						'label' => T_('Colorbox Image Zoom'),
+						'note' => T_('Check to enable javascript zooming on images (using the colorbox script)'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
+					'colorbox_vote_post' => array(
+						'label' => T_('Voting on Post Images'),
+						'note' => T_('Check this to enable AJAX voting buttons in the colorbox zoom view'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
+					'colorbox_vote_post_numbers' => array(
+						'label' => T_('Display Votes'),
+						'note' => T_('Check to display number of likes and dislikes'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
+					'colorbox_vote_comment' => array(
+						'label' => T_('Voting on Comment Images'),
+						'note' => T_('Check this to enable AJAX voting buttons in the colorbox zoom view'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
+					'colorbox_vote_comment_numbers' => array(
+						'label' => T_('Display Votes'),
+						'note' => T_('Check to display number of likes and dislikes'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
+					'colorbox_vote_user' => array(
+						'label' => T_('Voting on User Images'),
+						'note' => T_('Check this to enable AJAX voting buttons in the colorbox zoom view'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
+					'colorbox_vote_user_numbers' => array(
+						'label' => T_('Display Votes'),
+						'note' => T_('Check to display number of likes and dislikes'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
+					// Other settings
+					'gender_colored' => array(
+						'label' => T_('Display gender'),
+						'note' => T_('Use colored usernames to differentiate men & women.'),
+						'defaultvalue' => 0,
+						'type' => 'checkbox',
+					),
+					'bubbletip' => array(
+						'label' => T_('Username bubble tips'),
+						'note' => T_('Check to enable bubble tips on usernames'),
+						'defaultvalue' => 0,
+						'type' => 'checkbox',
+					),
+					'autocomplete_usernames' => array(
+						'label' => T_('Autocomplete usernames'),
+						'note' => T_('Check to enable auto-completion of usernames entered after a "@" sign in the comment forms'),
+						'defaultvalue' => 1,
+						'type' => 'checkbox',
+					),
+				'other_stgs_end' => array(
+					'layout' => 'end_fieldset',
 				),
 			), parent::get_param_definitions( $params ) );
 
@@ -390,12 +391,12 @@ class lava_Skin extends Skin
 		// Page blocks background color:
 		if( $color = $this->get_setting( 'pg_sec_bg_color' ) )
 		{
-			$custom_css .= '#comment_preview, article.evo_post, #feedbacks .evo_comment, .comment_form, .widget_core_coll_post_list ul, .widget_core_coll_comment_list ul, .col-md-3 .panel, .evo_comment {background-color: '.$color." }\n";
+			$custom_css .= '#comment_preview, article.evo_post, #feedbacks .evo_comment, .comment_form, .widget_core_coll_post_list ul, .widget_core_coll_comment_list ul, .col-md-3 .panel, .evo_comment, main .widget_core_coll_category_list ul {background-color: '.$color." }\n";
 		};
 		// Page blocks border color:
 		if( $color = $this->get_setting( 'pg_sec_bor_color' ) )
 		{
-			$custom_css .= '#comment_preview, article.evo_post, #feedbacks .evo_comment, .comment_form, .col-md-9 .widget_core_coll_post_list ul, .col-md-9 .widget_core_coll_comment_list ul, .col-md-3 .panel, .evo_comment {border: 1px solid '.$color." }\n";
+			$custom_css .= '#comment_preview, article.evo_post, #feedbacks .evo_comment, .comment_form, .col-md-9 .widget_core_coll_post_list ul, .col-md-9 .widget_core_coll_comment_list ul, .col-md-3 .panel, .evo_comment, main .widget_core_coll_category_list ul {border: 1px solid '.$color." }\n";
 		};
 		// Page text color:
 		if( $color = $this->get_setting( 'page_text_color' ) )
@@ -405,7 +406,7 @@ class lava_Skin extends Skin
 		// Page links color:
 		if( $color = $this->get_setting( 'page_links_color' ) )
 		{
-			$custom_css .= 'body a, .evo_container__page_top .ufld_icon_links a span:hover, .navi .compact_search_form .search_submit:hover, .well .post_title h2 a, .widget_core_coll_comment_list ul li a span.user, .widget_core_coll_comment_list ul li a.user, .col-md-3 .panel .widget_core_coll_comment_list ul li span.login {color: '.$color." }\n";
+			$custom_css .= 'body a, .evo_container__page_top .ufld_icon_links a span:hover, .navi .compact_search_form .search_submit:hover, .well .post_title h2 a, .widget_core_coll_comment_list ul li a span.user, .widget_core_coll_comment_list ul li a.user, .col-md-3 .panel .widget_core_coll_comment_list ul li span.login, .raty_cancel_on:before, .raty_star_on:before, .evo_comment_title a {color: '.$color." }\n";
 			$custom_css .= '.evo_container__page_top .ufld_icon_links a span, .navi ul.blog-navigation li a.selected, .navi .compact_search_form .search_submit, #nav-trigger > span, nav#nav-mobile ul li.active a {background-color: '.$color." }\n";
 			$custom_css .= '.navi ul.blog-navigation li a:hover, .single_navigation li a:hover, .search_submit, nav#nav-mobile ul li a:hover {background-color: '.$color." !important }\n";
 			$custom_css .= '.navi .compact_search_form .search_submit, .single_navigation li a, .search_submit, .search_submit:hover {border: 1px solid '.$color." }\n";
@@ -453,12 +454,7 @@ class lava_Skin extends Skin
 		// Full story button background color:
 		if( $color = $this->get_setting( 'fs_but_bg_color' ) )
 		{
-			$custom_css .= '.evo_post .evo_post__full .evo_post_more_link a {background-color: '.$color.'; border: 1px solid '.$color." }\n";
-		};
-		// Full story button hover color:
-		if( $color = $this->get_setting( 'fs_but_hov_col' ) )
-		{
-			$custom_css .= '.evo_post .evo_post__full .evo_post_more_link a:hover {color: '.$color.'; border: 1px solid '.$color." }\n";
+			$custom_css .= '.evo_post .evo_post__full .evo_post_more_link a, .evo_post .evo_post__full .evo_post_more_link a:hover {background-color: '.$color.' !important; border: 1px solid '.$color." }\n";
 		};
 		
 		

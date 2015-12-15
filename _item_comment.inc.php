@@ -57,17 +57,6 @@ if( $Comment->status != 'published' )
 	$Comment->status( 'styled' );
 }
 
-// Post title
-if( $params['comment_post_display'] )
-{
-	echo $params['comment_post_before'];
-	echo T_('In response to:').' ';
-	$Comment->Item->title( array(
-			'link_type' => 'permalink',
-		) );
-	echo $params['comment_post_after'];
-}
-
 // Title
 echo $params['comment_title_before'];
 
@@ -81,13 +70,13 @@ switch( $Comment->get( 'type' ) )
 	case 'comment': // Display a comment:
 		if( empty($Comment->ID) )
 		{	// PREVIEW comment
-			echo '<span class="evo_comment_type_preview">'.T_('PREVIEW Comment from:').'</span> ';
+			echo '<span class="evo_comment_type_preview">'.T_('PREVIEW From').'</span> ';
 		}
 		else
 		{	// Normal comment
 			$Comment->permanent_link( array(
 					'before'    => '',
-					'after'     => ' '.T_('From:').' ',
+					'after'     => ' '.T_('From').' ',
 					'text'      => T_(''),
 					'class'		=> 'evo_comment_type',
 					'nofollow'  => true,
@@ -108,6 +97,17 @@ switch( $Comment->get( 'type' ) )
 		{ // Display action icon to message only if this comment is from a visitor
 			$Comment->msgform_link( $Blog->get( 'msgformurl' ) );
 		}
+		
+		// Post title
+if( $params['comment_post_display'] )
+{
+	echo $params['comment_post_before'];
+	echo T_('on ').' ';
+	$Comment->Item->title( array(
+			'link_type' => 'permalink',
+		) );
+	echo $params['comment_post_after'];
+}
 		break;
 
 	case 'trackback': // Display a trackback:

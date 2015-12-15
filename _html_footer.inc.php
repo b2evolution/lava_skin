@@ -1,5 +1,10 @@
 <?php
 /**
+ * ==========================================================
+ * IMPORTANT: do NOT duplicate this file into a custom skin.
+ * If you do, your skin may break at any future core upgrade.
+ * ==========================================================
+ *
  * This is the HTML footer include template.
  *
  * For a quick explanation of b2evo 2.0 skins, please start here:
@@ -14,6 +19,41 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
 ?>
 <!-- End of skin_wrapper -->
 </div>
+
+
+
+<script type='text/javascript'>
+	(function($) {
+    /* Replace star icons in #comment_rating containers */
+
+    $('.star_rating').each(function() {
+
+        $(this).css('visibility', 'hidden');
+
+        var stars = parseInt($(this).find('>div').text());
+
+        $(this).find('>div').detach();
+
+        $(this).attr('id', 'comment_rating');
+
+        for (var i = 0; i < stars; i++) {
+
+            $(this).append('<span class="comment_rating raty_star_on"> </span>');
+
+        }
+        var stars_off = 5 - stars;
+
+        for (var j = 0; j < stars_off; j++) {
+
+            $(this).append('<span class="comment_rating raty_star_off"> </span>');
+
+        }
+
+        $(this).css('visibility', 'visible');
+
+    });
+	})(jQuery);
+</script>
 
 <?php
 	modules_call_method( 'SkinEndHtmlBody' );
