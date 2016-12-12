@@ -1,6 +1,6 @@
 <?php
 /**
- * This is the main/default page template for the "lava" skin.
+ * This is the main/default page template for the "bootstrap_blog" skin.
  *
  * This skin only uses one single template which includes most of its features.
  * It will also rely on default includes for specific dispays (like the comment form).
@@ -12,10 +12,11 @@
  * to handle the request (based on $disp).
  *
  * @package evoskins
+ * @subpackage bootstrap_blog
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
 
-if( version_compare( $app_version, '6.4' ) < 0 )
+if( evo_version_compare( $app_version, '6.4' ) < 0 )
 { // Older skins (versions 2.x and above) should work on newer b2evo versions, but newer skins may not work on older b2evo versions.
 	die( 'This skin is designed for b2evolution 6.4 and above. Please <a href="http://b2evolution.net/downloads/index.html">upgrade your b2evolution</a>.' );
 }
@@ -27,128 +28,21 @@ skin_init( $disp );
 
 // -------------------------- HTML HEADER INCLUDED HERE --------------------------
 skin_include( '_html_header.inc.php', array() );
-echo "<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>";
-echo '	<!-- RESPONSIVE NAVIGATION SCRIPT -->
-	<script>
-		$(document).ready(function(){
-			$("#nav-mobile").html($("#nav-main").html());
-			$("#nav-trigger span").click(function(){
-				if ($("nav#nav-mobile ul").hasClass("expanded")) {
-					$("nav#nav-mobile ul.expanded").removeClass("expanded").slideUp(450);
-					$(this).removeClass("open");
-				} else {
-					$("nav#nav-mobile ul").addClass("expanded").slideDown(450);
-					$(this).addClass("open");
-				}
-			});
-		});
-	</script>';
 // -------------------------------- END OF HEADER --------------------------------
 
 
 // ---------------------------- SITE HEADER INCLUDED HERE ----------------------------
 // If site headers are enabled, they will be included here:
-siteskin_include( '_site_body_header.inc.php' );
+skin_include( '_body_header.inc.php' );
 // ------------------------------- END OF SITE HEADER --------------------------------
 ?>
 
+
 <div class="container">
-<header class="row">
-	<div class="coll-xs-12 coll-sm-12 col-md-4 col-md-push-8">
-		<div class="evo_container evo_container__page_top">
-		<?php
-			// ------------------------- "Page Top" CONTAINER EMBEDDED HERE --------------------------
-			// Display container and contents:
-			skin_container( NT_('Page Top'), array(
-					// The following params will be used as defaults for widgets included in this container:
-					'block_start'         => '<div class="evo_widget $wi_class$">',
-					'block_end'           => '</div>',
-					'block_display_title' => false,
-					'list_start'          => '<ul>',
-					'list_end'            => '</ul>',
-					'item_start'          => '<li>',
-					'item_end'            => '</li>',
-				) );
-			// ----------------------------- END OF "Page Top" CONTAINER -----------------------------
-		?>
-		</div>
-	</div><!-- .col -->
-
-	<div class="coll-xs-12 col-sm-12 col-md-8 col-md-pull-4">
-		<div class="evo_container evo_container__header">
-		<?php
-			// ------------------------- "Header" CONTAINER EMBEDDED HERE --------------------------
-			// Display container and contents:
-			skin_container( NT_('Header'), array(
-					// The following params will be used as defaults for widgets included in this container:
-					'block_start'       => '<div class="evo_widget $wi_class$">',
-					'block_end'         => '</div>',
-					'block_title_start' => '<h1>',
-					'block_title_end'   => '</h1>',
-				) );
-			// ----------------------------- END OF "Header" CONTAINER -----------------------------
-		?>
-		</div>
-	</div><!-- .col -->
-</header><!-- .row -->
-
-<!-- ================================= NAVIGATION ================================= -->
-<div class="row navi">
-	<ul class="blog-navigation">
-	<?php
-		// ------------------------- "Menu" CONTAINER EMBEDDED HERE --------------------------
-		// Display container and contents:
-		// Note: this container is designed to be a single <ul> list
-		skin_container( NT_('Menu'), array(
-				// The following params will be used as defaults for widgets included in this container:
-				'block_start'         => '',
-				'block_end'           => '',
-				'block_display_title' => false,
-				'list_start'          => '',
-				'list_end'            => '',
-				'item_start'          => '<li class="evo_widget $wi_class$">',
-				'item_end'            => '</li>',
-				'item_selected_start' => '<li class="active evo_widget $wi_class$">',
-				'item_selected_end'   => '</li>',
-				'item_title_before'   => '',
-				'item_title_after'    => '',
-			) );
-		// ----------------------------- END OF "Menu" CONTAINER -----------------------------
-	?>
-	</ul>
-</div>
-<div id="nav-trigger">
-	<span>Menu</span>
-</div>
-	<nav id="nav-mobile">
-	<ul>
-	<?php
-		// ------------------------- "Menu" CONTAINER EMBEDDED HERE --------------------------
-		// Display container and contents:
-		// Note: this container is designed to be a single <ul> list
-		skin_container( NT_('Menu'), array(
-				// The following params will be used as defaults for widgets included in this container:
-				'block_start'         => '',
-				'block_end'           => '',
-				'block_display_title' => false,
-				'list_start'          => '',
-				'list_end'            => '',
-				'item_start'          => '<li class="evo_widget $wi_class$">',
-				'item_end'            => '</li>',
-				'item_selected_start' => '<li class="active evo_widget $wi_class$">',
-				'item_selected_end'   => '</li>',
-				'item_title_before'   => '',
-				'item_title_after'    => '',
-			) );
-		// ----------------------------- END OF "Menu" CONTAINER -----------------------------
-	?>
-	</ul>
-</nav>
-<!-- ============================== END OF NAVIGATION ============================== -->
 
 <div class="row">
 
-	<div class="col-md-9">
+	<div class="<?php echo $Skin->get_column_class(); ?>">
 
 		<main><!-- This is were a link like "Jump to main content" would land -->
 
@@ -169,12 +63,12 @@ siteskin_include( '_site_body_header.inc.php' );
 		<?php
 			// ------------------- PREV/NEXT POST LINKS (SINGLE POST MODE) -------------------
 			item_prevnext_links( array(
-					'block_start' => '<nav><ul class="single_navigation">',
+					'block_start' => '<nav><ul class="pager">',
 						'prev_start'  => '<li class="previous">',
 						'prev_end'    => '</li>',
 						'next_start'  => '<li class="next">',
 						'next_end'    => '</li>',
-					'block_end'   => '</ul></nav><div class="clear"></div>',
+					'block_end'   => '</ul></nav>',
 				) );
 			// ------------------------- END OF PREV/NEXT POST LINKS -------------------------
 		?>
@@ -196,6 +90,7 @@ siteskin_include( '_site_body_header.inc.php' );
 					'msgform_text'      => '',
 					'user_text'         => '',
 					'users_text'        => '',
+					'display_edit_links'=> false,
 				) );
 			// ----------------------------- END OF REQUEST TITLE ----------------------------
 		?>
@@ -203,59 +98,35 @@ siteskin_include( '_site_body_header.inc.php' );
 		<?php
 		// Go Grab the featured post:
 		if( ! in_array( $disp, array( 'single', 'page' ) ) && $Item = & get_featured_Item() )
-		{ // We have a featured/intro post to display:
+		{	// We have a featured/intro post to display:
+			$intro_item_style = '';
+			$LinkOwner = new LinkItem( $Item );
+			$LinkList = $LinkOwner->get_attachment_LinkList( 1, 'cover' );
+			if( ! empty( $LinkList ) &&
+					$Link = & $LinkList->get_next() &&
+					$File = & $Link->get_File() &&
+					$File->exists() &&
+					$File->is_image() )
+			{	// Use cover image of intro-post as background:
+				$intro_item_style = 'background-image: url("'.$File->get_url().'")';
+			}
 			// ---------------------- ITEM BLOCK INCLUDED HERE ------------------------
 			skin_include( '_item_block.inc.php', array(
 					'feature_block' => true,
-					'content_mode' => 'full', // We want regular "full" content, even in category browsing: i-e no excerpt or thumbnail
-					'intro_mode'   => 'normal',	// Intro posts will be displayed in normal mode
-					'item_class'   => ($Item->is_intro() ? 'well evo_intro_post' : 'well evo_featured_post'),
+					'content_mode'  => 'full', // We want regular "full" content, even in category browsing: i-e no excerpt or thumbnail
+					'intro_mode'    => 'normal',	// Intro posts will be displayed in normal mode
+					'item_class'    => ($Item->is_intro() ? 'well evo_intro_post' : 'well evo_featured_post').( empty( $intro_item_style ) ? '' : ' evo_hasbgimg' ),
+					'item_style'    => $intro_item_style,
+					'Item'          => $Item,
 				) );
 			// ----------------------------END ITEM BLOCK  ----------------------------
 		}
 		?>
 
 		<?php
-		if( $disp != 'front' && $disp != 'download' && $disp != 'search' )
-		{
-		?>
-
-		<?php
-			// --------------------------------- START OF POSTS -------------------------------------
-			// Display message if no post:
-			display_if_empty();
-
-			while( $Item = & mainlist_get_item() )
-			{ // For each blog post, do everything below up to the closing curly brace "}"
-
-				// ---------------------- ITEM BLOCK INCLUDED HERE ------------------------
-				skin_include( '_item_block.inc.php', array(
-						'content_mode' => 'auto',		// 'auto' will auto select depending on $disp-detail
-					) );
-				// ----------------------------END ITEM BLOCK  ----------------------------
-
-			} // ---------------------------------- END OF POSTS ------------------------------------
-		?>
-
-		<?php
-			// -------------------- PREV/NEXT PAGE LINKS (POST LIST MODE) --------------------
-			mainlist_page_links( array(
-					'block_start' => '<div class="center"><ul class="site_pagination">',
-					'block_end' => '</ul></div>',
-					'page_current_template' => '<span><b>$page_num$</b></span>',
-					'page_item_before' => '<li>',
-					'page_item_after' => '</li>',
-					'prev_text' => '<i class="fa fa-angle-double-left"></i>',
-					'next_text' => '<i class="fa fa-angle-double-right"></i>',
-				) );
-			// ------------------------- END OF PREV/NEXT PAGE LINKS -------------------------
-		}
-		?>
-
-		<?php
 			// -------------- MAIN CONTENT TEMPLATE INCLUDED HERE (Based on $disp) --------------
 			skin_include( '$disp$', array(
-					'author_link_text' => 'preferredname',
+					'author_link_text' => 'auto',
 					// Profile tabs to switch between user edit forms
 					'profile_tabs' => array(
 						'block_start'         => '<nav><ul class="nav nav-tabs profile_tabs">',
@@ -267,14 +138,18 @@ siteskin_include( '_site_body_header.inc.php' );
 					),
 					// Pagination
 					'pagination' => array(
-						'block_start' => '<div class="center"><ul class="site_pagination">',
-						'block_end' => '</ul></div>',
-						'page_current_template' => '<span><b>$page_num$</b></span>',
-						'page_item_before' => '<li>',
-						'page_item_after' => '</li>',
-						'prev_text' => '<i class="fa fa-angle-double-left"></i>',
-						'next_text' => '<i class="fa fa-angle-double-right"></i>',
+						'block_start'           => '<div class="center"><ul class="pagination">',
+						'block_end'             => '</ul></div>',
+						'page_current_template' => '<span>$page_num$</span>',
+						'page_item_before'      => '<li>',
+						'page_item_after'       => '</li>',
+						'page_item_current_before' => '<li class="active">',
+						'page_item_current_after'  => '</li>',
+						'prev_text'             => '<i class="fa fa-angle-double-left"></i>',
+						'next_text'             => '<i class="fa fa-angle-double-right"></i>',
 					),
+					// Item content:
+					'url_link_position'     => 'top',
 					// Form params for the forms below: login, register, lostpassword, activateinfo and msgform
 					'skin_form_before'      => '<div class="panel panel-default skin-form">'
 																				.'<div class="panel-heading">'
@@ -313,7 +188,7 @@ siteskin_include( '_site_body_header.inc.php' );
 					'search_submit_before' => '<span class="input-group-btn">',
 					'search_submit_after'  => '</span></div>',
 					// Front page
-					'featured_intro_before' => '<div class="jumbotron"><div class="intro_background_image"></div>',
+					'featured_intro_before' => '<div class="jumbotron">',
 					'featured_intro_after'  => '</div>',
 					// Form "Sending a message"
 					'msgform_form_title' => T_('Sending a message'),
@@ -326,87 +201,11 @@ siteskin_include( '_site_body_header.inc.php' );
 
 	</div><!-- .col -->
 
-	<aside class="col-md-3">
-		<!-- =================================== START OF SIDEBAR =================================== -->
-		<div class="evo_container evo_container__sidebar">
-		<?php
-			// ------------------------- "Sidebar" CONTAINER EMBEDDED HERE --------------------------
-			// Display container contents:
-			skin_container( NT_('Sidebar'), array(
-					// The following (optional) params will be used as defaults for widgets included in this container:
-					// This will enclose each widget in a block:
-					'block_start' => '<div class="panel panel-default evo_widget $wi_class$">',
-					'block_end' => '</div>',
-					// This will enclose the title of each widget:
-					'block_title_start' => '<div class="panel-heading"><h4 class="panel-title">',
-					'block_title_end' => '</h4></div>',
-					// This will enclose the body of each widget:
-					'block_body_start' => '<div class="panel-body">',
-					'block_body_end' => '</div>',
-					// If a widget displays a list, this will enclose that list:
-					'list_start' => '<ul>',
-					'list_end' => '</ul>',
-					// This will enclose each item in a list:
-					'item_start' => '<li>',
-					'item_end' => '</li>',
-					// This will enclose sub-lists in a list:
-					'group_start' => '<ul>',
-					'group_end' => '</ul>',
-					// This will enclose (foot)notes:
-					'notes_start' => '<div class="notes">',
-					'notes_end' => '</div>',
-					// Widget 'Search form':
-					'search_class'         => 'compact_search_form',
-					'search_input_before'  => '<div class="input-group">',
-					'search_input_after'   => '',
-					'search_submit_before' => '<span class="input-group-btn">',
-					'search_submit_after'  => '</span></div>',
-				) );
-			// ----------------------------- END OF "Sidebar" CONTAINER -----------------------------
-		?>
-		</div>
-
-		<div class="evo_container evo_container__sidebar2">
-		<?php
-			// ------------------------- "Sidebar" CONTAINER EMBEDDED HERE --------------------------
-			// Display container contents:
-			skin_container( NT_('Sidebar 2'), array(
-					// The following (optional) params will be used as defaults for widgets included in this container:
-					// This will enclose each widget in a block:
-					'block_start' => '<div class="panel panel-default evo_widget $wi_class$">',
-					'block_end' => '</div>',
-					// This will enclose the title of each widget:
-					'block_title_start' => '<div class="panel-heading"><h4 class="panel-title">',
-					'block_title_end' => '</h4></div>',
-					// This will enclose the body of each widget:
-					'block_body_start' => '<div class="panel-body">',
-					'block_body_end' => '</div>',
-					// If a widget displays a list, this will enclose that list:
-					'list_start' => '<ul>',
-					'list_end' => '</ul>',
-					// This will enclose each item in a list:
-					'item_start' => '<li>',
-					'item_end' => '</li>',
-					// This will enclose sub-lists in a list:
-					'group_start' => '<ul>',
-					'group_end' => '</ul>',
-					// This will enclose (foot)notes:
-					'notes_start' => '<div class="notes">',
-					'notes_end' => '</div>',
-					// Widget 'Search form':
-					'search_class'         => 'compact_search_form',
-					'search_input_before'  => '<div class="input-group">',
-					'search_input_after'   => '',
-					'search_submit_before' => '<span class="input-group-btn">',
-					'search_submit_after'  => '</span></div>',
-				) );
-			// ----------------------------- END OF "Sidebar" CONTAINER -----------------------------
-		?>
-		</div>
-	</aside><!-- .col -->
 </div><!-- .row -->
 
+
 <footer class="row">
+
 	<!-- =================================== START OF FOOTER =================================== -->
 	<div class="col-md-12">
 
@@ -422,7 +221,7 @@ siteskin_include( '_site_body_header.inc.php' );
 		?>
 		</div>
 
-		<p class="center">
+		<p>
 			<?php
 				// Display footer text (text can be edited in Blog Settings):
 				$Blog->footer_text( array(
@@ -472,11 +271,13 @@ siteskin_include( '_site_body_header.inc.php' );
 					'img_height'  => 32,
 				) );
 		?>
-		
-	</div><!-- .col -->	
+	</div><!-- .col -->
+	
 </footer><!-- .row -->
 
+
 </div><!-- .container -->
+
 
 <?php
 // ---------------------------- SITE FOOTER INCLUDED HERE ----------------------------
