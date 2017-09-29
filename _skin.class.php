@@ -115,7 +115,7 @@ class lava_Skin extends Skin
 					'label'  => T_('Layout Settings')
 				),
 					'layout' => array(
-						'label' => T_('Layout'),
+						'label' => T_('Layout Settings'),
 						'note' => T_('Select skin layout.'),
 						'defaultvalue' => 'right_sidebar',
 						'options' => array(
@@ -175,24 +175,15 @@ class lava_Skin extends Skin
 						'defaultvalue' => '#f87824',
 						'type' => 'color',
 					),
-					'bgimg_text_color' => array(
-						'label' => T_('Text color on background image'),
-						'note' => T_('E-g: #00ff00 for green'),
-						'defaultvalue' => '#fff',
-						'type' => 'color',
-					),
-					'bgimg_link_color' => array(
-						'label' => T_('Link color on background image'),
-						'note' => T_('E-g: #00ff00 for green'),
-						'defaultvalue' => '#f87824',
-						'type' => 'color',
-					),
-					'bgimg_hover_link_color' => array(
-						'label' => T_('Hover link color on background image'),
-						'note' => T_('E-g: #00ff00 for green'),
-						'defaultvalue' => '#f87824',
-						'type' => 'color',
-					),
+				'section_color_end' => array(
+					'layout' => 'end_fieldset',
+				),
+				
+
+				'section_nav_start' => array(
+					'layout' => 'begin_fieldset',
+					'label'  => T_('Navigation Settings')
+				),				
 					'navigation_bg_color' => array(
 						'label' => T_('Navigation background color'),
 						'note' => T_('E-g: #00ff00 for green'),
@@ -211,6 +202,15 @@ class lava_Skin extends Skin
 						'defaultvalue' => '#f87824',
 						'type' => 'color',
 					),
+				'section_nav_end' => array(
+					'layout' => 'end_fieldset',
+				),
+				
+				
+				'section_panel_start' => array(
+					'layout' => 'begin_fieldset',
+					'label'  => T_('Panel Blocks Settings')
+				),				
 					'panel_bg_color' => array(
 						'label' => T_('Panel background color'),
 						'note' => T_('Choose background color for function panels and widgets.'),
@@ -229,7 +229,34 @@ class lava_Skin extends Skin
 						'defaultvalue' => '#ffffff',
 						'type' => 'color',
 					),
-				'section_color_end' => array(
+				'section_panel_end' => array(
+					'layout' => 'end_fieldset',
+				),
+				
+				
+				'section_coverintro_start' => array(
+					'layout' => 'begin_fieldset',
+					'label'  => T_('Special Cover Image Settings')
+				),
+					'bgimg_text_color' => array(
+						'label' => T_('Text color on background image'),
+						'note' => T_('E-g: #00ff00 for green'),
+						'defaultvalue' => '#fff',
+						'type' => 'color',
+					),
+					'bgimg_link_color' => array(
+						'label' => T_('Link color on background image'),
+						'note' => T_('E-g: #00ff00 for green'),
+						'defaultvalue' => '#f87824',
+						'type' => 'color',
+					),
+					'bgimg_hover_link_color' => array(
+						'label' => T_('Hover link color on background image'),
+						'note' => T_('E-g: #00ff00 for green'),
+						'defaultvalue' => '#f87824',
+						'type' => 'color',
+					),
+				'section_coverintro_end' => array(
 					'layout' => 'end_fieldset',
 				),
 
@@ -427,6 +454,7 @@ class lava_Skin extends Skin
 			.well.evo_intro_post,
 			.error_403,
 			.deleted_thread_explanation,
+			.disp_tags main,
 			main .evo_widget:not(.evo_layout_rwd):not(.evo_layout_flow), main .widget_flow_blocks > div,
 			.widget_rwd_blocks .widget_rwd_content, div.widget_core_coll_featured_posts.evo_layout_rwd .widget_rwd_content, div.widget_core_coll_item_list.evo_layout_rwd .widget_rwd_content, div.widget_core_coll_page_list.evo_layout_rwd .widget_rwd_content, div.widget_core_coll_post_list.evo_layout_rwd .widget_rwd_content, div.widget_core_coll_related_post_list.evo_layout_rwd .widget_rwd_content,
 			.disp_access_denied main, .disp_arcdir main, .search_result, .disp_posts main > p.msg_nothing,
