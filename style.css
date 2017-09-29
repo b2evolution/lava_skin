@@ -198,6 +198,12 @@ main .disp_mediaidx_widget > h3 {
   padding: 20px;
   margin-bottom: 30px;
 }
+.evo_widget.widget_core_coll_title h1 {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 30px;
+  margin-bottom: 0;
+}
 .evo_widget.error_404 {
   margin: 0 0 30px;
 }
@@ -652,6 +658,15 @@ div.bSideItem h4 {
 .evo_panel__lostpass .panel .panel-body .btn-primary,
 .evo_panel__register .panel .panel-body .btn-primary,
 .evo_panel__activation .panel .panel-body .btn-primary {
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.03);
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+}
+.form-horizontal .btn-success,
+.form-horizontal .btn-primary {
   border-radius: 2px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.03);
   font-size: 12px;

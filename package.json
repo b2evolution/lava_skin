@@ -1,5 +1,5 @@
 {
-  "name": "material",
+  "name": "lava_skin",
   "version": "6.0.0",
   "description": "This file is used to define all modules used by grunt. Run 'npm install' or 'npm udapte' to download/update these packages.",
   "license": "GPL v2",
@@ -13,5 +13,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": ""
+  "author": "Milos Zivojinovic"
 }
