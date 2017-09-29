@@ -36,7 +36,7 @@ class lava_Skin extends Skin
 	 */
 	function get_default_name()
 	{
-		return 'Bootstrap Blog';
+		return 'Lava';
 	}
 
 
@@ -117,12 +117,14 @@ class lava_Skin extends Skin
 					'layout' => array(
 						'label' => T_('Layout'),
 						'note' => T_('Select skin layout.'),
-						'defaultvalue' => 'single_column',
+						'defaultvalue' => 'right_sidebar',
 						'options' => array(
 								'single_column'              => T_('Single Column Large'),
 								'single_column_normal'       => T_('Single Column'),
 								'single_column_narrow'       => T_('Single Column Narrow'),
 								'single_column_extra_narrow' => T_('Single Column Extra Narrow'),
+								'left_sidebar'               => T_('Left Sidebar'),
+								'right_sidebar'              => T_('Right Sidebar'),
 							),
 						'type' => 'select',
 					),
@@ -132,6 +134,19 @@ class lava_Skin extends Skin
 						'defaultvalue' => '',
 						'type' => 'integer',
 						'allow_empty' => true,
+					),
+					'font_size' => array(
+						'label' => T_('Font size'),
+						'note' => T_('Select content font size.'),
+						'defaultvalue' => 'default',
+						'options' => array(
+								'default'        => T_('Default (14px)'),
+								'standard'       => T_('Standard (16px)'),
+								'medium'         => T_('Medium (18px)'),
+								'large'          => T_('Large (20px)'),
+								'very_large'     => T_('Very large (22px)'),
+							),
+						'type' => 'select',
 					),
 				'section_layout_end' => array(
 					'layout' => 'end_fieldset',
@@ -144,33 +159,20 @@ class lava_Skin extends Skin
 				),
 					'page_bg_color' => array(
 						'label' => T_('Background color'),
-						'note' => T_('Default value is') . ' <code>#1b221b</code>.',
-						'defaultvalue' => '#1b221b',
+						'note' => T_('E-g: #ff0000 for red'),
+						'defaultvalue' => '#f8f8f8',
 						'type' => 'color',
-					),
-					'page_bg_image' => array(
-						'label'			=> T_( 'Background Images' ),
-						'note'			=> T_( 'Set background image' ),
-						'type'			=> 'text',
-						'defaultvalue' => 'images/background1.png',
-						'size' 			=> 40,
 					),
 					'page_text_color' => array(
 						'label' => T_('Text color'),
 						'note' => T_('E-g: #00ff00 for green'),
-						'defaultvalue' => '#555',
+						'defaultvalue' => '#444444',
 						'type' => 'color',
 					),
 					'page_link_color' => array(
 						'label' => T_('Link color'),
 						'note' => T_('E-g: #00ff00 for green'),
-						'defaultvalue' => '#f83201',
-						'type' => 'color',
-					),
-					'page_hover_link_color' => array(
-						'label' => T_('Hover link color'),
-						'note' => T_('E-g: #00ff00 for green'),
-						'defaultvalue' => '#23527c',
+						'defaultvalue' => '#f87824',
 						'type' => 'color',
 					),
 					'bgimg_text_color' => array(
@@ -182,70 +184,52 @@ class lava_Skin extends Skin
 					'bgimg_link_color' => array(
 						'label' => T_('Link color on background image'),
 						'note' => T_('E-g: #00ff00 for green'),
-						'defaultvalue' => '#6cb2ef',
+						'defaultvalue' => '#f87824',
 						'type' => 'color',
 					),
 					'bgimg_hover_link_color' => array(
 						'label' => T_('Hover link color on background image'),
 						'note' => T_('E-g: #00ff00 for green'),
-						'defaultvalue' => '#6cb2ef',
+						'defaultvalue' => '#f87824',
 						'type' => 'color',
 					),
-					'current_tab_text_color' => array(
-						'label' => T_('Current tab text color'),
+					'navigation_bg_color' => array(
+						'label' => T_('Navigation background color'),
 						'note' => T_('E-g: #00ff00 for green'),
-						'defaultvalue' => '#333',
+						'defaultvalue' => '#343434',
+						'type' => 'color',
+					),
+					'navigation_link_color' => array(
+						'label' => T_('Navigation links color'),
+						'note' => T_('E-g: #00ff00 for green'),
+						'defaultvalue' => '#ffffff',
+						'type' => 'color',
+					),
+					'current_tab_bg_color' => array(
+						'label' => T_('Active navigation link background color'),
+						'note' => T_('E-g: #00ff00 for green'),
+						'defaultvalue' => '#f87824',
+						'type' => 'color',
+					),
+					'panel_bg_color' => array(
+						'label' => T_('Panel background color'),
+						'note' => T_('Choose background color for function panels and widgets.'),
+						'defaultvalue' => '#ffffff',
+						'type' => 'color',
+					),
+					'panel_heading_bg_color' => array(
+						'label' => T_('Panel heading background color'),
+						'note' => T_('Choose background color for function panels and widgets.'),
+						'defaultvalue' => '#f87824',
+						'type' => 'color',
+					),
+					'panel_heading_color' => array(
+						'label' => T_('Panel heading color'),
+						'note' => T_('Choose text color for function panels and widgets.'),
+						'defaultvalue' => '#ffffff',
 						'type' => 'color',
 					),
 				'section_color_end' => array(
-					'layout' => 'end_fieldset',
-				),
-				
-				
-				'section_post_start' => array(
-					'layout' => 'begin_fieldset',
-					'label'  => T_('Custom Settings')
-				),
-					'post_bg_color' => array(
-						'label' => T_('Post background color'),
-						'note' => T_('Default value is') . ' <code>#fefefe</code>.',
-						'defaultvalue' => '#fefefe',
-						'type' => 'color',
-					),
-					'post_info_color' => array(
-						'label' => T_('Post info color'),
-						'note' => T_('Default value is') . ' <code>#b1b1b1</code>.',
-						'defaultvalue' => '#b1b1b1',
-						'type' => 'color',
-					),
-					'post_header_align' => array(
-						'label'    => T_('Header alignment'),
-						'note'     => '',
-						'type'     => 'radio',
-						'options'  => array(
-							array( 'left', T_('Left') ),
-							array( 'center', T_('Center') ),
-							array( 'right', T_('Right') ),
-						),
-						'defaultvalue' => 'center',
-					),
-					// 'post_title_color' => array(
-						// 'label' => T_('Post title color'),
-						// 'note' => T_('Default value is') . ' <code>#f83201</code>.',
-						// 'defaultvalue' => '#f83201',
-						// 'type' => 'color',
-					// ),
-					'cover_image_path' => array(
-						'label'    => T_('Cover image path'),
-						'note'     => '"' . T_('Post') . '" '. T_('leads to parent post URL') . '"' . T_('Image') . '" ' . T_('opens specific image'),
-						'type'     => 'radio',
-						'options'  => array(
-							array( 'post',  T_('Post') ),
-							array( 'image', T_('Image') ),
-						),
-						'defaultvalue' => 'post',
-					),
-				'section_post_end' => array(
 					'layout' => 'end_fieldset',
 				),
 
@@ -340,6 +324,8 @@ class lava_Skin extends Skin
 							array( 'header',   sprintf( T_('"%s" container'), NT_('Header') ),    1 ),
 							array( 'page_top', sprintf( T_('"%s" container'), NT_('Page Top') ),  1 ),
 							array( 'menu',     sprintf( T_('"%s" container'), NT_('Menu') ),      0 ),
+							array( 'sidebar',  sprintf( T_('"%s" container'), NT_('Sidebar') ),   0 ),
+							array( 'sidebar2', sprintf( T_('"%s" container'), NT_('Sidebar 2') ), 0 ),
 							array( 'footer',   sprintf( T_('"%s" container'), NT_('Footer') ),    1 ) ),
 						),
 				'section_access_end' => array(
@@ -373,76 +359,34 @@ class lava_Skin extends Skin
 				'bootstrap_init_tooltips', // Inline JS to init Bootstrap tooltips (E.g. on comment form for allowed file extensions)
 				'disp_auto',               // Automatically include additional CSS and/or JS required by certain disps (replace with 'disp_off' to disable this)
 			) );
-			
-		// require_js( 'assets/jgallery.min.js', 'relative' );
-		// require_js( 'assets/touchswipe.min.js', 'relative' );
-		// require_css( 'assets/jgallery.min.css', 'relative' );
-		
-		// add_js_headline('
-		// $( function(){
-			// $( ".evo_post_gallery" ).jGallery( {
-				// "transitionCols":"1",
-				// "transitionRows":"1",
-				// "thumbnailsPosition":"bottom",
-				// "thumbType":"image",
-				// "backgroundColor":"FFFFFF",
-				// "textColor":"000000",
-				// "mode":"standard
-			// } );
-		// } );');
-		
-		require_js( 'assets/jquery.bxslider.min.js', 'relative' );
-		require_css( 'assets/jquery.bxslider.css', 'relative' );
-		add_js_headline("
-			$( document ).ready( function()
-			{
-				$( '.bxslider' ).bxSlider({
-					adaptiveHeight: true,
-					//pagerCustom: '.bxslider'
-				});
-			});
-		");
 
 		// Skin specific initializations:
 		global $media_url, $media_path;
+		
+		add_headline('<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700" rel="stylesheet">');
 
 		// Add custom CSS:
 		$custom_css = '';
 
 		if( $color = $this->get_setting( 'page_bg_color' ) )
 		{ // Custom page background color:
-			$custom_css .= 'body { background-color: '.$color." }\n";
-		}
-		if( $path = $this->get_setting( 'page_bg_image' ) )
-		{ // Custom page background color:
-			$custom_css .= 'body { background:url('.$path.") }\n";
-		}
-		if( $color = $this->get_setting( 'post_bg_color' ) )
-		{ // Custom page text color:
-			$custom_css .= '.evo_content_block, main > h2 { background-color: '.$color." }\n";
-		}
-		if( $color = $this->get_setting( 'post_info_color' ) )
-		{ // Custom page text color:
-			$custom_css .= '.custom_post_time { color: '.$color." }\n";
+			$custom_css .= '#skin_wrapper, .evo_content_block table th, .post_tags a { background-color: '.$color." }\n";
+			$custom_css .= '.evo_content_block table th, .evo_content_block table th, .evo_content_block table td { border-color: '.$color." }\n";
 		}
 		if( $color = $this->get_setting( 'page_text_color' ) )
 		{ // Custom page text color:
-			$custom_css .= 'body { color: '.$color." }\n";
+			$custom_css .= '#skin_wrapper, .evo_intro_post .evo_post_title .btn { color: '.$color." }\n";
+			$custom_css .= '.search_submit, .search_submit:hover, .profile_tabs li.active a, .profile_tabs li.active a:hover { background-color: '.$color."; border-color: $color }\n";
 		}
 		if( $color = $this->get_setting( 'page_link_color' ) )
 		{ // Custom page link color:
-			$custom_css .= 'a { color: '.$color." }\n";
-			$custom_css .= 'h4.evo_comment_title a, h4.panel-title a.evo_comment_type, .pagination li:not(.active) a, .pagination li:not(.active) span { color: '.$color." !important }\n";
-			$custom_css .= '.pagination li.active a, .pagination li.active span { color: #fff; background-color: '.$color.' !important; border-color: '.$color." }\n";
-			$custom_css .= '.evo_post .evo_image_block a:after { background-color: '.$color." }\n";
+			$custom_css .= 'a, a:hover, .evo_comment__meta_info a, .evo_post_comment_notification a, .evo_post_feedback_feed_msg a { color: '.$color." }\n";
+			// $custom_css .= 'h4.evo_comment_title a, h4.panel-title a.evo_comment_type { color: '.$color." }\n";
+			$custom_css .= '#bCalendarToday, .pager li a:hover, .post_tags a:hover, .evo_comment__meta_info a:hover, .evo_post_comment_notification a:hover, .evo_post_feedback_feed_msg a:hover { background-color: '.$color."; border-color: $color }\n";
 			if( $this->get_setting( 'gender_colored' ) !== 1 )
 			{ // If gender option is not enabled, choose custom link color. Otherwise, chose gender link colors:
 				$custom_css .= 'h4.panel-title a { color: '.$color." }\n";
 			}
-		}
-		if( $color = $this->get_setting( 'page_hover_link_color' ) )
-		{ // Custom page link color on hover:
-			$custom_css .= 'a:hover { color: '.$color." }\n";
 		}
 		if( $color = $this->get_setting( 'bgimg_text_color' ) )
 		{	// Custom text color on background image:
@@ -456,9 +400,48 @@ class lava_Skin extends Skin
 		{	// Custom link hover color on background image:
 			$custom_css .= '.evo_hasbgimg a:hover { color: '.$color." }\n";
 		}
-		if( $color = $this->get_setting( 'current_tab_text_color' ) )
+		if( $color = $this->get_setting( 'navigation_bg_color' ) )
+		{	// Custom link hover color on background image:
+			$custom_css .= '.navbar.navbar-default, .evo_comment__list_title { background-color: '.$color." }\n";
+		}
+		if( $color = $this->get_setting( 'navigation_link_color' ) )
+		{	// Custom link hover color on background image:
+			$custom_css .= '.navbar.navbar-default .nav a, .navbar.navbar-default .nav a:hover { color: '.$color." }\n";
+			$custom_css .= '.navbar-default .navbar-toggle { border-color: '.$color." }\n";
+			$custom_css .= '.navbar-default .navbar-toggle .icon-bar { background-color: '.$color." }\n";
+		}
+		if( $color = $this->get_setting( 'navigation_link_h_color' ) )
+		{ // Custom hovered tab background text color:
+			$custom_css .= 'ul.nav.nav-tabs li a.default:hover { background-color: '.$color."; border-top-color: $color; border-left-color: $color; border-right-color: $color }\n";
+		}
+		if( $color = $this->get_setting( 'current_tab_bg_color' ) )
 		{ // Custom current tab text color:
-			$custom_css .= 'ul.nav.nav-tabs li a.selected { color: '.$color." }\n";
+			$custom_css .= '.navbar.navbar-default .nav li a.selected { background-color: '.$color." }\n";
+		}
+		if( $color = $this->get_setting( 'panel_bg_color' ) )
+		{ // Panel background text color:
+			$custom_css .= '
+			.panel,
+			.pagination>li>a, .pager li a,
+			.evo_comment__meta_info a, .evo_post_comment_notification a, .evo_post_feedback_feed_msg a,
+			.well.evo_intro_post,
+			.error_403,
+			.deleted_thread_explanation,
+			main .evo_widget:not(.evo_layout_rwd):not(.evo_layout_flow), main .widget_flow_blocks > div,
+			.widget_rwd_blocks .widget_rwd_content, div.widget_core_coll_featured_posts.evo_layout_rwd .widget_rwd_content, div.widget_core_coll_item_list.evo_layout_rwd .widget_rwd_content, div.widget_core_coll_page_list.evo_layout_rwd .widget_rwd_content, div.widget_core_coll_post_list.evo_layout_rwd .widget_rwd_content, div.widget_core_coll_related_post_list.evo_layout_rwd .widget_rwd_content,
+			.disp_access_denied main, .disp_arcdir main, .search_result, .disp_posts main > p.msg_nothing,
+			.profile_tabs li a
+			{ background-color: '.$color." }\n";
+			$custom_css .= '#bCalendarToday, .pager li a:hover, .post_tags a:hover, .evo_comment__meta_info a:hover, .evo_post_comment_notification a:hover, .evo_post_feedback_feed_msg a:hover, .profile_tabs li.active a, .profile_tabs li a:hover { color: '.$color." }\n";
+		}
+		if( $color = $this->get_setting( 'panel_heading_bg_color' ) )
+		{ // Panel border color:
+			$custom_css .= '.panel .panel-heading, .pagination li.active a, .pagination li.active span, .disp_mediaidx_widget > h3, .disp_sitemap main > h2, .disp_catdir main .widget_core_coll_category_list > h3, .disp_arcdir main > h2, .disp_search main > h2, .search_result_score, .disp_posts main > h2, .profile_tabs li a:hover { background-color: '.$color."; border-color: $color }\n";
+			$custom_css .= '.pagination>li:not(.active) a { color: '.$color." }\n";
+		}
+		if( $color = $this->get_setting( 'panel_heading_color' ) )
+		{ // Panel border color:
+			$custom_css .= '.panel .panel-heading, .panel .panel-heading a, .evo_comment__list_title, .disp_mediaidx_widget > h3, .disp_sitemap main > h2, .disp_catdir main .widget_core_coll_category_list > h3, .disp_arcdir main > h2, .disp_search main > h2, .search_result_score, .disp_posts main > h2 { color: '.$color." }\n";
 		}
 
 		// Limit images by max height:
@@ -466,6 +449,65 @@ class lava_Skin extends Skin
 		if( $max_image_height > 0 )
 		{
 			$custom_css .= '.evo_image_block img { max-height: '.$max_image_height.'px; width: auto; }'." }\n";
+		}
+
+		// Font size customization
+		if( $font_size = $this->get_setting( 'font_size' ) )
+		{
+			switch( $font_size )
+			{
+				case 'default': // When default font size, no CSS entry
+					//$custom_css .= '';
+					break;
+
+				case 'standard':// When standard layout
+					$custom_css .= '.container { font-size: 16px !important'." }\n";
+					$custom_css .= '.container input.search_field { height: 100%'." }\n";
+					$custom_css .= '.container h1 { font-size: 38px'." }\n";
+					$custom_css .= '.container h2 { font-size: 32px'." }\n";
+					$custom_css .= '.container h3 { font-size: 26px'." }\n";
+					$custom_css .= '.container h4 { font-size: 18px'." }\n";
+					$custom_css .= '.container h5 { font-size: 16px'." }\n";
+					$custom_css .= '.container h6 { font-size: 14px'." }\n";
+					$custom_css .= '.container .small { font-size: 85% !important'." }\n";
+					break;
+
+				case 'medium': // When default font size, no CSS entry
+					$custom_css .= '.container { font-size: 18px !important'." }\n";
+					$custom_css .= '.container input.search_field { height: 100%'." }\n";
+					$custom_css .= '.container h1 { font-size: 40px'." }\n";
+					$custom_css .= '.container h2 { font-size: 34px'." }\n";
+					$custom_css .= '.container h3 { font-size: 28px'." }\n";
+					$custom_css .= '.container h4 { font-size: 20px'." }\n";
+					$custom_css .= '.container h5 { font-size: 18px'." }\n";
+					$custom_css .= '.container h6 { font-size: 16px'." }\n";
+					$custom_css .= '.container .small { font-size: 85% !important'." }\n";
+					break;
+
+				case 'large': // When default font size, no CSS entry
+					$custom_css .= '.container { font-size: 20px !important'." }\n";
+					$custom_css .= '.container input.search_field { height: 100%'." }\n";
+					$custom_css .= '.container h1 { font-size: 42px'." }\n";
+					$custom_css .= '.container h2 { font-size: 36px'." }\n";
+					$custom_css .= '.container h3 { font-size: 30px'." }\n";
+					$custom_css .= '.container h4 { font-size: 22px'." }\n";
+					$custom_css .= '.container h5 { font-size: 20px'." }\n";
+					$custom_css .= '.container h6 { font-size: 18px'." }\n";
+					$custom_css .= '.container .small { font-size: 85% !important'." }\n";
+					break;
+
+				case 'very_large': // When default font size, no CSS entry
+					$custom_css .= '.container { font-size: 22px !important'." }\n";
+					$custom_css .= '.container input.search_field { height: 100%'." }\n";
+					$custom_css .= '.container h1 { font-size: 44px'." }\n";
+					$custom_css .= '.container h2 { font-size: 38px'." }\n";
+					$custom_css .= '.container h3 { font-size: 32px'." }\n";
+					$custom_css .= '.container h4 { font-size: 24px'." }\n";
+					$custom_css .= '.container h5 { font-size: 22px'." }\n";
+					$custom_css .= '.container h6 { font-size: 20px'." }\n";
+					$custom_css .= '.container .small { font-size: 85% !important'." }\n";
+					break;
+			}
 		}
 
 		if( ! empty( $custom_css ) )
@@ -503,6 +545,32 @@ class lava_Skin extends Skin
 
 
 	/**
+	 * Check if we can display a sidebar for the current layout
+	 *
+	 * @param boolean TRUE to check if at least one sidebar container is visible
+	 * @return boolean TRUE to display a sidebar
+	 */
+	function is_visible_sidebar( $check_containers = false )
+	{
+		$layout = $this->get_setting( 'layout' );
+
+		if( $layout != 'left_sidebar' && $layout != 'right_sidebar' )
+		{ // Sidebar is not displayed for selected skin layout
+			return false;
+		}
+
+		if( $check_containers )
+		{ // Check if at least one sidebar container is visible
+			return ( $this->is_visible_container( 'sidebar' ) ||  $this->is_visible_container( 'sidebar2' ) );
+		}
+		else
+		{ // We should not check the visibility of the sidebar containers for this case
+			return true;
+		}
+	}
+
+
+	/**
 	 * Get value for attbiute "class" of column block
 	 * depending on skin setting "Layout"
 	 *
@@ -527,6 +595,15 @@ class lava_Skin extends Skin
 			case 'single_column_extra_narrow':
 				// Single Column Extra Narrow
 				return 'col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3';
+
+			case 'left_sidebar':
+				// Left Sidebar
+				return 'col-md-9 pull-right';
+
+			case 'right_sidebar':
+				// Right Sidebar
+			default:
+				return 'col-md-9';
 		}
 	}
 }

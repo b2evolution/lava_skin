@@ -34,7 +34,6 @@ siteskin_include( '_site_body_header.inc.php' );
 // ------------------------------- END OF SITE HEADER --------------------------------
 ?>
 
-
 <div class="container">
 
 

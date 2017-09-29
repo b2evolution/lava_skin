@@ -20,8 +20,11 @@ siteskin_include( '_site_body_header.inc.php' );
 <div class="container">
 
 <header class="row">
-
 	<div class="coll-xs-12 coll-sm-12 col-md-4 col-md-push-8">
+		<?php
+		if( $Skin->is_visible_container( 'page_top' ) )
+		{ // Display 'Page Top' widget container
+		?>
 		<div class="evo_container evo_container__page_top">
 		<?php
 			// ------------------------- "Page Top" CONTAINER EMBEDDED HERE --------------------------
@@ -39,9 +42,14 @@ siteskin_include( '_site_body_header.inc.php' );
 			// ----------------------------- END OF "Page Top" CONTAINER -----------------------------
 		?>
 		</div>
+		<?php } ?>
 	</div><!-- .col -->
 
 	<div class="coll-xs-12 col-sm-12 col-md-8 col-md-pull-4">
+		<?php
+		if( $Skin->is_visible_container( 'header' ) )
+		{ // Display 'Header' widget container
+		?>
 		<div class="evo_container evo_container__header">
 		<?php
 			// ------------------------- "Header" CONTAINER EMBEDDED HERE --------------------------
@@ -56,10 +64,15 @@ siteskin_include( '_site_body_header.inc.php' );
 			// ----------------------------- END OF "Header" CONTAINER -----------------------------
 		?>
 		</div>
+		<?php } ?>
 	</div><!-- .col -->
 
 </header><!-- .row -->
 
+<?php
+if( $Skin->is_visible_container( 'menu' ) )
+{ // Display 'Menu' widget container
+?>
 <nav class="navbar navbar-default">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -98,3 +111,4 @@ siteskin_include( '_site_body_header.inc.php' );
       </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
+<?php } ?>

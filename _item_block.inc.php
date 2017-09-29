@@ -37,78 +37,35 @@ $params = array_merge( array(
 		'image_size'                 => 'fit-1280x720',
 		'author_link_text'           => 'auto',
 	), $params );
-	
-	
-// Cover image path
-$cover_image_path = 'post';
-if( $disp == 'single' )
-{
-	$cover_image_path = 'image';
-}
-	
-	
-// Post header alignment
-$post_header_align = 'center';	
-if( $Skin->get_setting( 'post_header_align' ) == 'left' )
-{
-	$post_header_align = 'left';
-} else if( $Skin->get_setting( 'post_header_align' ) == 'right' )
-{
-	$post_header_align = 'right';
-}
 
+// Return "true" if disps "front" or "posts"
+$is_front_or_posts = in_array( $disp, array( 'front', 'posts') ) && ! $Item->is_intro() ? true : false;
 
 echo '<div class="evo_content_block">'; // Beginning of post display
 ?>
 
-<article id="<?php $Item->anchor_id() ?>" class="<?php $Item->div_classes( $params ) ?>" lang="<?php $Item->lang() ?>"<?php
+<article id="<?php $Item->anchor_id() ?>" class="<?php $Item->div_classes( $params ); echo $is_front_or_posts ? ' panel panel-default' : ''; ?>" lang="<?php $Item->lang() ?>"<?php
 	echo empty( $params['item_style'] ) ? '' : ' style="'.format_to_output( $params['item_style'], 'htmlattr' ).'"' ?>>
+
+	<?php echo ! $is_front_or_posts && ! $Item->is_intro() ? '<div class="panel panel-default">' : ''; ?>
 	
-	<?php
-			$Item->images( array(
-				'before_images'            => '<div class="evo_post_images">',
-				'before_image'             => '<div class="evo_post_images"><figure class="evo_image_block cover_image_wrapper ' . $cover_image_path. '">',
-				'before_image_legend'      => '<figcaption class="evo_image_legend">',
-				'after_image_legend'       => '</figcaption>',
-				'after_image'              => '</figure></div>',
-				'after_images'             => '</div>',
-				'image_class'              => 'img-responsive',
-				'image_size'               => 'fit-1280x720',
-				'image_limit'              =>  1,
-				'image_link_to'            => 'original', // Can be 'original', 'single' or empty          <i class="fa fa-link" aria-hidden="true"></i>
-
-				// We DO NOT want to display galleries here, only one cover image
-				'gallery_image_limit'      => 0,
-				'gallery_colls'            => 0,
-
-				// We want ONLY cover image to display here
-				'restrict_to_image_position' => 'cover',
-			) );
-	?>
-
-	<header class="<?php echo $post_header_align; ?>">
+	<header class="panel-heading">
 	<?php
 		$Item->locale_temp_switch(); // Temporarily switch to post locale (useful for multilingual blogs)
-		
-					// We want to display the post time:
-			$Item->issue_time( array(
-				'before'      => '<div class="custom_post_time">',
-				'after'       => '</div>',
-				'time_format' => 'M j, Y',
-			) );
 
 		// ------- Title -------
 		if( $params['disp_title'] )
 		{
-			echo $params['item_title_line_before'];
-
 			if( $disp == 'single' || $disp == 'page' )
 			{
+				echo $params['item_title_line_before'];
+
 				$title_before = $params['item_title_single_before'];
 				$title_after = $params['item_title_single_after'];
 			}
 			else
 			{
+				echo $params['item_title_line_before'];
 				$title_before = $params['item_title_before'];
 				$title_after = $params['item_title_after'];
 			}
@@ -134,66 +91,12 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 			echo $params['item_title_line_after'];
 		}
 	?>
-	</header>
 
 	<?php
-	if( $disp == 'single' )
-	{
-		?>
-		<div class="evo_container evo_container__item_single">
-		<?php
-		// ------------------------- "Item Single" CONTAINER EMBEDDED HERE --------------------------
-		// Display container contents:
-		skin_container( /* TRANS: Widget container name */ NT_('Item Single'), array(
-			'widget_context' => 'item',	// Signal that we are displaying within an Item
-			// The following (optional) params will be used as defaults for widgets included in this container:
-			// This will enclose each widget in a block:
-			'block_start' => '<div class="$wi_class$">',
-			'block_end' => '</div>',
-			// This will enclose the title of each widget:
-			'block_title_start' => '<h3>',
-			'block_title_end' => '</h3>',
-			// Template params for "Item Tags" widget
-			'widget_item_tags_before'    => '<nav class="small post_tags">'.T_('Tags').': ',
-			'widget_item_tags_after'     => '</nav>',
-			// Params for skin file "_item_content.inc.php"
-			'widget_item_content_params' => $params,
-			// Template params for "Item Attachments" widget:
-			'widget_item_attachments_params' => array(
-					'limit_attach'       => 1000,
-					'before'             => '<div class="evo_post_attachments"><h3>'.T_('Attachments').':</h3><ul class="evo_files">',
-					'after'              => '</ul></div>',
-					'before_attach'      => '<li class="evo_file">',
-					'after_attach'       => '</li>',
-					'before_attach_size' => ' <span class="evo_file_size">(',
-					'after_attach_size'  => ')</span>',
-				),
-		) );
-		// ----------------------------- END OF "Item Single" CONTAINER -----------------------------
-		?>
-		</div>
-		<?php
-	}
-	else
-	{
-	// this will create a <section>
-		// ---------------------- POST CONTENT INCLUDED HERE ----------------------
-		skin_include( '_item_content.inc.php', $params );
-		// Note: You can customize the default item content by copying the generic
-		// /skins/_item_content.inc.php file into the current skin folder.
-		// -------------------------- END OF POST CONTENT -------------------------
-	// this will end a </section>
-	}
+	if( ! $Item->is_intro() )
+	{ // Don't display the following for intro posts
 	?>
-
-	<footer>
-
-		<?php
-			if( ! $Item->is_intro() ) // Do NOT apply tags, comments and feedback on intro posts
-			{
-		?>
-
-	<div class="small text-muted">
+	<div class="item_single_header">
 	<?php
 		if( $Item->status != 'published' )
 		{
@@ -219,7 +122,69 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 		// ----------------------------- END OF "Item Single - Header" CONTAINER -----------------------------
 	?>
 	</div>
+	<?php
+	}
+	?>
+	</header>
 
+	<?php
+	if( $disp == 'single' )
+	{
+		?>
+		<div class="evo_container evo_container__item_single panel-body">
+		<?php
+		// ------------------------- "Item Single" CONTAINER EMBEDDED HERE --------------------------
+		// Display container contents:
+		skin_container( /* TRANS: Widget container name */ NT_('Item Single'), array(
+			'widget_context' => 'item',	// Signal that we are displaying within an Item
+			// The following (optional) params will be used as defaults for widgets included in this container:
+			// This will enclose each widget in a block:
+			'block_start' => '<div class="$wi_class$">',
+			'block_end' => '</div>',
+			// This will enclose the title of each widget:
+			'block_title_start' => '<h3>',
+			'block_title_end' => '</h3>',
+			// Template params for "Item Tags" widget
+			// 'widget_item_tags_before'    => '<nav class="small post_tags">'.T_('Tags').': ',
+			'widget_item_tags_separator' => '',
+			'widget_item_tags_after'     => '</nav>',
+			// Params for skin file "_item_content.inc.php"
+			'widget_item_content_params' => $params,
+			// Template params for "Item Attachments" widget:
+			'widget_item_attachments_params' => array(
+					'limit_attach'       => 1000,
+					'before'             => '<div class="evo_post_attachments"><h3>'.T_('Attachments').':</h3><ul class="evo_files">',
+					'after'              => '</ul></div>',
+					'before_attach'      => '<li class="evo_file">',
+					'after_attach'       => '</li>',
+					'before_attach_size' => ' <span class="evo_file_size">(',
+					'after_attach_size'  => ')</span>',
+				),
+		) );
+		// ----------------------------- END OF "Item Single" CONTAINER -----------------------------
+		?>
+		</div>
+		<?php
+	}
+	else
+	{
+	// this will create a <section>
+		// ---------------------- POST CONTENT INCLUDED HERE ----------------------
+		skin_include( '_item_content.inc.php', array_merge( array(
+				'content_start_full' => '<section class="evo_post__full panel-body">',
+			), $params ) );
+		// Note: You can customize the default item content by copying the generic
+		// /skins/_item_content.inc.php file into the current skin folder.
+		// -------------------------- END OF POST CONTENT -------------------------
+	// this will end a </section>
+	}
+	?>
+
+	<?php
+	if( ! $Item->is_intro() && $is_front_or_posts ) // Do NOT apply tags, comments and feedback on intro posts
+	{
+	?>
+	<footer class="panel-footer">
 		<nav class="post_comments_link">
 		<?php
 			// Link to comments, trackbacks, etc.:
@@ -247,8 +212,12 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 						) );
 		?>
 		</nav>
-		<?php } ?>
 	</footer>
+	<?php
+	}
+	?>
+	
+	<?php echo ! $is_front_or_posts && ! $Item->is_intro() ? '</div>' : ''; ?>
 
 	<?php
 		// ------------------ FEEDBACK (COMMENTS/TRACKBACKS) INCLUDED HERE ------------------
