@@ -469,7 +469,9 @@ class lava_Skin extends Skin
 		}
 		if( $color = $this->get_setting( 'panel_heading_color' ) )
 		{ // Panel border color:
-			$custom_css .= '.panel .panel-heading, .panel .panel-heading a, .evo_comment__list_title, .disp_mediaidx_widget > h3, .disp_sitemap main > h2, .disp_catdir main .widget_core_coll_category_list > h3, .disp_arcdir main > h2, .disp_search main > h2, .search_result_score, .disp_posts main > h2 { color: '.$color." }\n";
+			$custom_css .= '.panel .panel-heading, .panel .panel-heading a, .evo_comment__list_title, .disp_mediaidx_widget > h3, .disp_sitemap main > h2, .disp_catdir main .widget_core_coll_category_list > h3, .disp_arcdir main > h2, .disp_search main > h2, .search_result_score, .disp_posts main > h2
+			{ color: '.$color." }\n";
+			$custom_css .= '.widget_core_item_info_line a.evo_post_flag_btn > span { color: '.$color." !important }\n";
 		}
 
 		// Limit images by max height:
