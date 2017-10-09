@@ -81,10 +81,12 @@
 .results .page_size_selector {
   margin-bottom: 20px;
 }
-main.panel .panel-body {
+main.panel .panel-body,
+.disp_tags main .panel-body {
   padding: 20px;
 }
-main.panel h2 {
+main.panel h2,
+.disp_tags main h2 {
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
@@ -288,6 +290,9 @@ form ul.token-input-list-facebook {
   margin: 0;
   padding: 20px;
 }
+.disp_search main .center .pagination {
+  margin-bottom: 25px;
+}
 input.search_field {
   margin-bottom: 0;
   display: inline-block;
@@ -373,6 +378,7 @@ div.extended_search_form .search_options .search_option {
 }
 /* --------------------- Other disps ---------------------- */
 .disp_access_denied main,
+.disp_tags main,
 .disp_threads main .panel,
 .disp_arcdir main {
   border-radius: 2px;

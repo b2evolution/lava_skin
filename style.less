@@ -76,7 +76,8 @@
 		margin-bottom: 20px;
 	}
 }
-main.panel
+main.panel,
+.disp_tags main
 {
 	.panel-body {
 		padding: 20px;
@@ -299,15 +300,21 @@ form ul.token-input-list-facebook
 
 /* --------------------- Search disp ---------------------- */
 
-.disp_search main > h2
+.disp_search
 {
-	border-radius: 2px 2px 0 0;
-	box-shadow: 0 0 6px rgba(0,0,0,0.03);
-	font-size: 16px;
-	font-weight: 700;
-	text-transform: uppercase;
-	margin: 0;
-	padding: 20px;
+	main > h2
+	{
+		border-radius: 2px 2px 0 0;
+		box-shadow: 0 0 6px rgba(0,0,0,0.03);
+		font-size: 16px;
+		font-weight: 700;
+		text-transform: uppercase;
+		margin: 0;
+		padding: 20px;
+	}
+	main .center .pagination {
+		margin-bottom: 25px;
+	}
 }
 // A search button
 input.search_field {
@@ -399,6 +406,7 @@ div.extended_search_form {
 /* --------------------- Other disps ---------------------- */
 
 .disp_access_denied main,
+.disp_tags main,
 .disp_threads main .panel,
 .disp_arcdir main
 {
