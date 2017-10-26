@@ -741,12 +741,24 @@ div.bSideItem h4 {
   margin-top: 0;
 }
 .pagination {
+  border-radius: 2px !important;
   margin: 0;
 }
 .pagination li > a,
 .pagination li > span {
   border: 0;
   padding: 10px 14px;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+  border-top-left-radius: 2px !important;
+  border-bottom-left-radius: 2px !important;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span,
+.pagination li.listnav_last > a {
+  border-top-right-radius: 2px !important;
+  border-bottom-right-radius: 2px !important;
 }
 div.action_messages,
 div.log_container {
