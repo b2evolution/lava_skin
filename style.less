@@ -810,10 +810,23 @@ div.bSideItem {
 	}
 	
 	&>li:last-child>a,
-	&>li:last-child>span,
-	& li.listnav_last>a {
+	&>li:last-child>span {
 		border-top-right-radius: 2px !important;
 		border-bottom-right-radius: 2px !important;
+	}
+}
+
+@media only screen and (min-width: 320px) {
+	li.listnav_last>a {
+		border-top-right-radius: 2px;
+		border-bottom-right-radius: 2px;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	li.listnav_last>a {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
 	}
 }
 
