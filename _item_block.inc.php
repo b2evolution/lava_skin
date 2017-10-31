@@ -107,9 +107,12 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 
 		// ------------------------- "Item Single - Header" CONTAINER EMBEDDED HERE --------------------------
 		// Display container contents:
-		skin_container( /* TRANS: Widget container name */ NT_('Item Single Header'), array(
+		widget_container( 'item_single_header', array(
 			'widget_context' => 'item',	// Signal that we are displaying within an Item
 			// The following (optional) params will be used as defaults for widgets included in this container:
+			'container_display_if_empty' => false, // If no widget, don't display container at all
+			'container_start' => '<div class="evo_container $wico_class$">',
+			'container_end'   => '</div>',
 			// This will enclose each widget in a block:
 			'block_start' => '<div class="$wi_class$">',
 			'block_end' => '</div>',
@@ -130,14 +133,14 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	<?php
 	if( $disp == 'single' )
 	{
-		?>
-		<div class="evo_container evo_container__item_single panel-body">
-		<?php
 		// ------------------------- "Item Single" CONTAINER EMBEDDED HERE --------------------------
 		// Display container contents:
-		skin_container( /* TRANS: Widget container name */ NT_('Item Single'), array(
+		widget_container( 'item_single', array(
 			'widget_context' => 'item',	// Signal that we are displaying within an Item
 			// The following (optional) params will be used as defaults for widgets included in this container:
+			'container_display_if_empty' => false, // If no widget, don't display container at all
+			'container_start' => '<div class="evo_container $wico_class$ panel-body">',
+			'container_end'   => '</div>',
 			// This will enclose each widget in a block:
 			'block_start' => '<div class="$wi_class$">',
 			'block_end' => '</div>',
@@ -162,9 +165,6 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 				),
 		) );
 		// ----------------------------- END OF "Item Single" CONTAINER -----------------------------
-		?>
-		</div>
-		<?php
 	}
 	else
 	{
