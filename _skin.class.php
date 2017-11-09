@@ -21,7 +21,7 @@ class lava_Skin extends Skin
 	 * Skin version
 	 * @var string
 	 */
-	var $version = '0.1';
+	var $version = '7.1';
 
 	/**
 	 * Do we want to use style.min.css instead of style.css ?
