@@ -48,47 +48,39 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	echo empty( $params['item_style'] ) ? '' : ' style="'.format_to_output( $params['item_style'], 'htmlattr' ).'"' ?>>
 
 	<?php echo ! $is_front_or_posts && ! $Item->is_intro() ? '<div class="panel panel-default">' : ''; ?>
-	
+
 	<header class="panel-heading">
 	<?php
 		$Item->locale_temp_switch(); // Temporarily switch to post locale (useful for multilingual blogs)
 
 		// ------- Title -------
+		$edit_link = '';
 		if( $params['disp_title'] )
 		{
 			if( $disp == 'single' || $disp == 'page' )
 			{
-				echo $params['item_title_line_before'];
-
 				$title_before = $params['item_title_single_before'];
 				$title_after = $params['item_title_single_after'];
 			}
 			else
 			{
-				echo $params['item_title_line_before'];
 				$title_before = $params['item_title_before'];
 				$title_after = $params['item_title_after'];
 			}
 
-			// POST TITLE:
-			$Item->title( array(
-					'before'    => $title_before,
-					'after'     => $title_after,
-					'link_type' => '#'
-				) );
-
 			// EDIT LINK:
 			if( $Item->is_intro() )
 			{ // Display edit link only for intro posts, because for all other posts the link is displayed on the info line.
+				ob_start();
 				$Item->edit_link( array(
 							'before' => '<div class="'.button_class( 'group' ).'">',
 							'after'  => '</div>',
 							'text'   => $Item->is_intro() ? get_icon( 'edit' ).' '.T_('Edit Intro') : '#',
 							'class'  => button_class( 'text' ),
 						) );
+				$edit_link = ob_get_contents();
+				ob_clean();
 			}
-
-			echo $params['item_title_line_after'];
 		}
 	?>
 
@@ -98,17 +90,11 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	?>
 	<div class="item_single_header">
 	<?php
-		if( $Item->status != 'published' )
-		{
-			$Item->format_status( array(
-					'template' => '<div class="evo_status evo_status__$status$ badge pull-right" data-toggle="tooltip" data-placement="top" title="$tooltip_title$">$status_title$</div>',
-				) );
-		}
-
 		// ------------------------- "Item Single - Header" CONTAINER EMBEDDED HERE --------------------------
 		// Display container contents:
 		widget_container( 'item_single_header', array(
 			'widget_context' => 'item',	// Signal that we are displaying within an Item
+			'ignored_widgets' => array( 'item_next_previous' ),
 			// The following (optional) params will be used as defaults for widgets included in this container:
 			'container_display_if_empty' => false, // If no widget, don't display container at all
 			'container_start' => '<div class="evo_container $wico_class$">',
@@ -119,6 +105,24 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 			// This will enclose the title of each widget:
 			'block_title_start' => '<h3>',
 			'block_title_end' => '</h3>',
+			// Template params for "Item Next/Previous" widget:
+				'widget_item_next_previous_params' => array(
+					'block_start' => '<ul class="pager">',
+					'prev_start'  => '<li class="previous">',
+					'prev_end'    => '</li>',
+					'next_start'  => '<li class="next">',
+					'next_end'    => '</li>',
+					'block_end'   => '</ul>',
+				),
+			// Template params for "Item Title" widget:
+			'widget_item_title_params'  => array(
+					'before' => '<div class="evo_post_title">'.$title_before,
+					'after' => $title_after.$edit_link.'</div>',
+					'link_type' => '#',
+				),
+			// Template params for "Item Visibility Badge" widget:
+			'widget_item_visibility_badge_display'  => ( ! $Item->is_intro() && $Item->status != 'published' ),
+			'widget_item_visibility_badge_template' => '<div class="evo_status evo_status__$status$ badge pull-right" data-toggle="tooltip" data-placement="top" title="$tooltip_title$">$status_title$</div>',
 
 			'author_link_text' => $params['author_link_text'],
 		) );
@@ -216,7 +220,7 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	<?php
 	}
 	?>
-	
+
 	<?php echo ! $is_front_or_posts && ! $Item->is_intro() ? '</div>' : ''; ?>
 
 	<?php
