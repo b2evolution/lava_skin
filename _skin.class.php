@@ -120,6 +120,62 @@ class lava_Skin extends Skin
 	}
 
 
+	/**
+	 * Get the declarations of the widgets that the skin wants to use.
+	 *
+	 * @param string Collection kind: 'std', 'main', 'photo', 'group', 'forum', 'manual'
+	 * @param array Additional params. Example value 'init_as_blog_b' => true
+	 * @return array Array of default widgets:
+	 *          - Key - Container code,
+	 *          - Value - array of widget arrays OR SPECIAL VALUES:
+	 *             - 'coll_type': Include this container only for collection kinds separated by comma, first char "-" means to exclude,
+	 *             - 'type': Container type, empty - main container, other values: 'sub', 'page', 'shared', 'shared-sub',
+	 *             - 'name': Container name,
+	 *             - 'order': Container order,
+	 *             - widget data array():
+	 *                - 0: Widget order (*mandatory field*),
+	 *                - 1: Widget code (*mandatory field*),
+	 *                - 'params' - Widget params(array or serialized string),
+	 *                - 'type' - Widget type(default = 'core', another value - 'plugin'),
+	 *                - 'enabled' - Boolean value; default is TRUE; FALSE to install the widget as disabled,
+	 *                - 'coll_type': Include this widget only for collection kinds separated by comma, first char "-" means to exclude,
+	 *                - 'install' - Boolean value; default is TRUE; FALSE to skip this widget on install.
+	 */
+	function get_default_widgets( $kind = '', $context = array() )
+	{
+		global $DB;
+
+		$context = array_merge( array(
+				'current_coll_ID'       => NULL,
+				'coll_home_ID'          => NULL,
+				'coll_blog_a_ID'        => NULL,
+				'coll_photoblog_ID'     => NULL,
+				'init_as_home'          => false,
+				'init_as_blog_a'        => false,
+				'init_as_blog_b'        => false,
+				'init_as_forums'        => false,
+				'init_as_events'        => false,
+				'install_test_features' => false,
+			), $context );
+
+		$default_widgets = array();
+
+		/* Item in List */
+		$default_widgets['item_in_list'] = array(
+			array( 5, 'item_title' ),
+			array( 10, 'item_visibility_badge' ),
+		);
+
+		/* Item Single Header */
+		$default_widgets['item_single_header'] = array(
+			array(  5, 'item_title' ),
+			array( 10, 'item_visibility_badge' ),
+		);
+
+		return $default_widgets;
+	}
+
+
 	/*
 	 * What CSS framework does has this skin been designed with?
 	 *
@@ -209,12 +265,12 @@ class lava_Skin extends Skin
 				'section_color_end' => array(
 					'layout' => 'end_fieldset',
 				),
-				
+
 
 				'section_nav_start' => array(
 					'layout' => 'begin_fieldset',
 					'label'  => T_('Navigation Settings')
-				),				
+				),
 					'navigation_bg_color' => array(
 						'label' => T_('Navigation background color'),
 						'note' => T_('E-g: #00ff00 for green'),
@@ -236,12 +292,12 @@ class lava_Skin extends Skin
 				'section_nav_end' => array(
 					'layout' => 'end_fieldset',
 				),
-				
-				
+
+
 				'section_panel_start' => array(
 					'layout' => 'begin_fieldset',
 					'label'  => T_('Panel Blocks Settings')
-				),				
+				),
 					'panel_bg_color' => array(
 						'label' => T_('Panel background color'),
 						'note' => T_('Choose background color for function panels and widgets.'),
@@ -263,8 +319,8 @@ class lava_Skin extends Skin
 				'section_panel_end' => array(
 					'layout' => 'end_fieldset',
 				),
-				
-				
+
+
 				'section_coverintro_start' => array(
 					'layout' => 'begin_fieldset',
 					'label'  => T_('Special Cover Image Settings')
@@ -420,7 +476,7 @@ class lava_Skin extends Skin
 
 		// Skin specific initializations:
 		global $media_url, $media_path;
-		
+
 		add_headline('<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700" rel="stylesheet">');
 
 		// Add custom CSS:

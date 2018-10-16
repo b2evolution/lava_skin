@@ -87,49 +87,86 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 	<?php
 	if( ! $Item->is_intro() )
 	{ // Don't display the following for intro posts
-	?>
-	<div class="item_single_header">
-	<?php
-		// ------------------------- "Item Single - Header" CONTAINER EMBEDDED HERE --------------------------
-		// Display container contents:
-		widget_container( 'item_single_header', array(
-			'widget_context' => 'item',	// Signal that we are displaying within an Item
-			'ignored_widgets' => array( 'item_next_previous' ),
-			// The following (optional) params will be used as defaults for widgets included in this container:
-			'container_display_if_empty' => false, // If no widget, don't display container at all
-			'container_start' => '<div class="evo_container $wico_class$">',
-			'container_end'   => '</div>',
-			// This will enclose each widget in a block:
-			'block_start' => '<div class="$wi_class$">',
-			'block_end' => '</div>',
-			// This will enclose the title of each widget:
-			'block_title_start' => '<h3>',
-			'block_title_end' => '</h3>',
-			// Template params for "Item Next/Previous" widget:
-				'widget_item_next_previous_params' => array(
-					'block_start' => '<ul class="pager">',
-					'prev_start'  => '<li class="previous">',
-					'prev_end'    => '</li>',
-					'next_start'  => '<li class="next">',
-					'next_end'    => '</li>',
-					'block_end'   => '</ul>',
-				),
-			// Template params for "Item Title" widget:
-			'widget_item_title_params'  => array(
-					'before' => '<div class="evo_post_title">'.$title_before,
-					'after' => $title_after.$edit_link.'</div>',
-					'link_type' => '#',
-				),
-			// Template params for "Item Visibility Badge" widget:
-			'widget_item_visibility_badge_display'  => ( ! $Item->is_intro() && $Item->status != 'published' ),
-			'widget_item_visibility_badge_template' => '<div class="evo_status evo_status__$status$ badge pull-right" data-toggle="tooltip" data-placement="top" title="$tooltip_title$">$status_title$</div>',
+		echo '<div class="item_single_header">';
+		if( $disp == 'posts' )
+		{
+			// ------------------------- "Item in List" CONTAINER EMBEDDED HERE --------------------------
+			// Display container contents:
+			widget_container( 'item_in_list', array(
+				'widget_context' => 'item',	// Signal that we are displaying within an Item
+				// The following (optional) params will be used as defaults for widgets included in this container:
+				'container_display_if_empty' => false, // If no widget, don't display container at all
+				// This will enclose each widget in a block:
+				'block_start' => '<div class="$wi_class$">',
+				'block_end'   => '</div>',
+				// This will enclose the title of each widget:
+				'block_title_start' => '<h3>',
+				'block_title_end'   => '</h3>',
+				// Template params for "Item Title" widget:
+				'widget_item_title_params'  => array(
+						'before'    => '<div class="evo_post_title">'.$title_before,
+						'after'     => $title_after.$edit_link.'</div>',
+						'link_type' => '#',
+					),
+				// Template params for "Item Visibility Badge" widget:
+				'widget_item_visibility_badge_display'  => ( ! $Item->is_intro() && $Item->status != 'published' ),
+				'widget_item_visibility_badge_template' => '<div class="evo_status evo_status__$status$ badge pull-right" data-toggle="tooltip" data-placement="top" title="$tooltip_title$">$status_title$</div>',
 
-			'author_link_text' => $params['author_link_text'],
-		) );
-		// ----------------------------- END OF "Item Single - Header" CONTAINER -----------------------------
-	?>
-	</div>
-	<?php
+				'author_link_text' => $params['author_link_text'],
+
+			) );
+			// ----------------------------- END OF "Item in List" CONTAINER -----------------------------
+		}
+		elseif( $disp == 'single' )
+		{
+			// ------------------------- "Item Single - Header" CONTAINER EMBEDDED HERE --------------------------
+			// Display container contents:
+			widget_container( 'item_single_header', array(
+				'widget_context' => 'item',	// Signal that we are displaying within an Item
+				// The following (optional) params will be used as defaults for widgets included in this container:
+				'container_display_if_empty' => false, // If no widget, don't display container at all
+				'container_start'            => '<div class="evo_container $wico_class$">',
+				'container_end'              => '</div>',
+				// This will enclose each widget in a block:
+				'block_start' => '<div class="$wi_class$">',
+				'block_end'   => '</div>',
+				// This will enclose the title of each widget:
+				'block_title_start' => '<h3>',
+				'block_title_end'   => '</h3>',
+				// Template params for "Item Next/Previous" widget:
+				'widget_item_next_previous_params' => array(
+						'block_start' => '<ul class="pager">',
+						'prev_start'  => '<li class="previous">',
+						'prev_end'    => '</li>',
+						'next_start'  => '<li class="next">',
+						'next_end'    => '</li>',
+						'block_end'   => '</ul>',
+					),
+				// Template params for "Item Title" widget:
+				'widget_item_title_params'  => array(
+						'before'    => '<div class="evo_post_title">'.$title_before,
+						'after'     => $title_after.$edit_link.'</div>',
+						'link_type' => '#',
+					),
+
+				// Template params for "Item Visibility Badge" widget:
+				'widget_item_visibility_badge_display'  => ( ! $Item->is_intro() && $Item->status != 'published' ),
+				'widget_item_visibility_badge_template' => '<div class="evo_status evo_status__$status$ badge pull-right" data-toggle="tooltip" data-placement="top" title="$tooltip_title$">$status_title$</div>',
+
+				'author_link_text' => $params['author_link_text'],
+			) );
+			// ----------------------------- END OF "Item Single - Header" CONTAINER -----------------------------
+		}
+		else
+		{
+			// POST TITLE:
+			$Item->title( array(
+				'before'    => $title_before,
+				'after'     => $title_after.$edit_link,
+				'link_type' => '#'
+			) );
+		}
+		echo '</div>';
 	}
 	?>
 	</header>
@@ -169,6 +206,39 @@ echo '<div class="evo_content_block">'; // Beginning of post display
 				),
 		) );
 		// ----------------------------- END OF "Item Single" CONTAINER -----------------------------
+	}
+	elseif( $disp == 'page' )
+	{
+		// ------------------------- "Item Page" CONTAINER EMBEDDED HERE --------------------------
+		// Display container contents:
+		widget_container( 'item_page', array(
+			'widget_context' => 'item',	// Signal that we are displaying within an Item
+			// The following (optional) params will be used as defaults for widgets included in this container:
+			'container_display_if_empty' => false, // If no widget, don't display container at all
+			// This will enclose each widget in a block:
+			'block_start' => '<div class="evo_widget $wi_class$">',
+			'block_end'   => '</div>',
+			// This will enclose the title of each widget:
+			'block_title_start' => '<h3>',
+			'block_title_end'   => '</h3>',
+			// Template params for "Item Tags" widget
+			// 'widget_item_tags_before'    => '<nav class="small post_tags">'.T_('Tags').': ',
+			'widget_item_tags_separator' => '',
+			'widget_item_tags_after'     => '</nav>',
+			// Params for skin file "_item_content.inc.php"
+			'widget_item_content_params' => $params,
+			// Template params for "Item Attachments" widget:
+			'widget_item_attachments_params' => array(
+					'limit_attach'       => 1000,
+					'before'             => '<div class="evo_post_attachments"><h3>'.T_('Attachments').':</h3><ul class="evo_files">',
+					'after'              => '</ul></div>',
+					'before_attach'      => '<li class="evo_file">',
+					'after_attach'       => '</li>',
+					'before_attach_size' => ' <span class="evo_file_size">(',
+					'after_attach_size'  => ')</span>',
+				),
+		) );
+		// ----------------------------- END OF "Item Page" CONTAINER -----------------------------
 	}
 	else
 	{
