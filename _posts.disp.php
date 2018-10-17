@@ -21,15 +21,15 @@ widget_container( 'item_list', array(
 	// The following (optional) params will be used as defaults for widgets included in this container:
 	'container_display_if_empty' => false, // If no widget, don't display container at all
 	// This will enclose each widget in a block:
-	'block_start' => '<div class="center"><ul class="pagination panel panel-default">',
-	'block_end'   => '</ul></div>',
+	'block_start' => '<div class="$wi_class$">',
+	'block_end'   => '</div>',
 	// This will enclose the title of each widget:
 	'block_title_start' => '<h3>',
 	'block_title_end'   => '</h3>',
 	// Template params for "Item List Pages" widget:
 	'widget_coll_item_list_pages_params' => array(
-			'block_start'              => '',
-			'block_end'                => '',
+			'block_start'              => '<div class="center"><ul class="pagination panel panel-default">',
+			'block_end'                => '</ul></div>',
 			'page_current_template'    => '<span>$page_num$</span>',
 			'page_item_before'         => '<li>',
 			'page_item_after'          => '</li>',
