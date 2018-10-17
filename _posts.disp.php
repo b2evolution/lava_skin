@@ -26,14 +26,18 @@ widget_container( 'item_list', array(
 	// This will enclose the title of each widget:
 	'block_title_start' => '<h3>',
 	'block_title_end'   => '</h3>',
-	// The following params will be used as default for widgets
-	'page_item_before'         => '<li>',
-	'page_item_after'          => '</li>',
-	'page_item_current_before' => '<li class="active">',
-	'page_item_current_after'  => '</li>',
-	'page_current_template'    => '<span>$page_num$</span>',
-	'prev_text'                => '<i class="fa fa-angle-double-left"></i>',
-	'next_text'                => '<i class="fa fa-angle-double-right"></i>',
+	// Template params for "Item List Pages" widget:
+	'widget_coll_item_list_pages_params' => array(
+			'block_start'              => '',
+			'block_end'                => '',
+			'page_current_template'    => '<span>$page_num$</span>',
+			'page_item_before'         => '<li>',
+			'page_item_after'          => '</li>',
+			'page_item_current_before' => '<li class="active">',
+			'page_item_current_after'  => '</li>',
+			'prev_text'                => '<i class="fa fa-angle-double-left"></i>',
+			'next_text'                => '<i class="fa fa-angle-double-right"></i>',
+		),
 ) );
 // ----------------------------- END OF "Item List" CONTAINER -----------------------------
 

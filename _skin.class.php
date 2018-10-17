@@ -123,7 +123,8 @@ class lava_Skin extends Skin
 	/**
 	 * Get the declarations of the widgets that the skin wants to use.
 	 *
-	 * @param string Collection kind: 'std', 'main', 'photo', 'group', 'forum', 'manual'
+	 * @param string Collection type: 'std', 'main', 'photo', 'group', 'forum', 'manual'
+	 * @param string Skin type: 'normal' - Standard, 'mobile' - Phone, 'tablet' - Tablet
 	 * @param array Additional params. Example value 'init_as_blog_b' => true
 	 * @return array Array of default widgets:
 	 *          - Key - Container code,
@@ -138,10 +139,11 @@ class lava_Skin extends Skin
 	 *                - 'params' - Widget params(array or serialized string),
 	 *                - 'type' - Widget type(default = 'core', another value - 'plugin'),
 	 *                - 'enabled' - Boolean value; default is TRUE; FALSE to install the widget as disabled,
-	 *                - 'coll_type': Include this widget only for collection kinds separated by comma, first char "-" means to exclude,
+	 *                - 'coll_type': Include this widget only for collection types separated by comma, first char "-" means to exclude,
+	 *                - 'skin_type': Include this widget only for skin types separated by comma, first char "-" means to exclude,
 	 *                - 'install' - Boolean value; default is TRUE; FALSE to skip this widget on install.
 	 */
-	function get_default_widgets( $kind = '', $context = array() )
+	function get_default_widgets( $coll_type = '', $skin_type = 'normal', $context = array() )
 	{
 		global $DB;
 
